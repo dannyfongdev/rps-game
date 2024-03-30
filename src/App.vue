@@ -11,7 +11,7 @@
       Scissors
     </button>
   </div>
-
+  <GameToken :choice="computerChoice" />
   <p class="">Moves Left: {{ 10 - moves }}</p>
   <p>{{ choiceStatus }}</p>
   <p class="">{{ result }}</p>
@@ -20,7 +20,11 @@
 </template>
 
 <script>
+import GameToken from "./components/GameToken.vue";
 export default {
+  components: {
+    GameToken,
+  },
   data() {
     return {
       playerScore: 0,
@@ -28,14 +32,15 @@ export default {
       moves: 0,
       result: "",
       choiceStatus: "Let's Play!",
+      computerChoice: "",
     };
   },
   methods: {
     play(playerChoice) {
       const computerOptions = ["rock", "paper", "scissors"];
       const choiceNumber = Math.floor(Math.random() * 3);
-      const computerChoice = computerOptions[choiceNumber];
-      this.winner(playerChoice, computerChoice);
+      this.computerChoice = computerOptions[choiceNumber];
+      this.winner(playerChoice, this.computerChoice);
       this.moves++;
       if (this.moves === 10) {
         this.gameOver();
