@@ -1,22 +1,24 @@
 <template>
-  <h1>Rock, Paper, Scissors Game</h1>
-  <div class="flex gap-1">
-    <button @click="play('rock')" class="bg-blue-100 px-4 py-2 rounded">
-      Rock
-    </button>
-    <button @click="play('paper')" class="bg-blue-100 px-4 py-2 rounded">
-      Paper
-    </button>
-    <button @click="play('scissors')" class="bg-blue-100 px-4 py-2 rounded">
-      Scissors
-    </button>
+  <div class="gradient-board text-[#FFF]">
+    <h1>Rock, Paper, Scissors Game</h1>
+    <div class="flex gap-1">
+      <button @click="play('rock')" class="bg-blue-100 px-4 py-2 rounded">
+        Rock
+      </button>
+      <button @click="play('paper')" class="bg-blue-100 px-4 py-2 rounded">
+        Paper
+      </button>
+      <button @click="play('scissors')" class="bg-blue-100 px-4 py-2 rounded">
+        Scissors
+      </button>
+    </div>
+    <GameToken :choice="computerChoice" />
+    <p class="">Moves Left: {{ 10 - moves }}</p>
+    <p>{{ choiceStatus }}</p>
+    <p class="">{{ result }}</p>
+    <p class="">Player Score: {{ playerScore }}</p>
+    <p class="">Computer Score: {{ computerScore }}</p>
   </div>
-  <GameToken :choice="computerChoice" />
-  <p class="">Moves Left: {{ 10 - moves }}</p>
-  <p>{{ choiceStatus }}</p>
-  <p class="">{{ result }}</p>
-  <p class="">Player Score: {{ playerScore }}</p>
-  <p class="">Computer Score: {{ computerScore }}</p>
 </template>
 
 <script>

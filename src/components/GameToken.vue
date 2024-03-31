@@ -1,6 +1,8 @@
 <template>
-  <div>{{ choice }}</div>
-  <img :src="imageURL" alt="game token" />
+  <div :class="backgroundGradient">
+    <div>{{ choice }}</div>
+    <img :src="imageURL" alt="game token" />
+  </div>
 </template>
 
 <script>
@@ -11,6 +13,9 @@ export default {
   computed: {
     imageURL() {
       return "images/icon-" + this.choice + ".svg";
+    },
+    backgroundGradient() {
+      return "gradient-" + this.choice;
     },
   },
 };
