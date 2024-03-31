@@ -1,31 +1,48 @@
 <template>
-  <div class="gradient-board text-[#FFF]">
-    <h1>Rock, Paper, Scissors Game</h1>
-    <div class="flex gap-1">
-      <button @click="play('rock')" class="bg-blue-100 px-4 py-2 rounded">
-        Rock
-      </button>
-      <button @click="play('paper')" class="bg-blue-100 px-4 py-2 rounded">
-        Paper
-      </button>
-      <button @click="play('scissors')" class="bg-blue-100 px-4 py-2 rounded">
-        Scissors
-      </button>
+  <div class="">
+    <div class="h-[100vh] grid grid-rows-[auto_1fr] gradient-board text-[#FFF]">
+      <div class="">
+        <Header :score="playerScore - computerScore" />
+      </div>
+      <div class="bg-red-100">
+        <h1>Rock, Paper, Scissors Game</h1>
+        <div class="flex gap-1">
+          <button @click="play('rock')" class="bg-blue-100 px-4 py-2 rounded">
+            Rock
+          </button>
+          <button @click="play('paper')" class="bg-blue-100 px-4 py-2 rounded">
+            Paper
+          </button>
+          <button
+            @click="play('scissors')"
+            class="bg-blue-100 px-4 py-2 rounded"
+          >
+            Scissors
+          </button>
+        </div>
+        <GameToken :choice="computerChoice" />
+        <p class="">Moves Left: {{ 10 - moves }}</p>
+        <p>{{ choiceStatus }}</p>
+        <p class="">{{ result }}</p>
+        <p class="">Player Score: {{ playerScore }}</p>
+        <p class="">Computer Score: {{ computerScore }}</p>
+      </div>
+      <div class="">
+        <Footer />
+      </div>
     </div>
-    <GameToken :choice="computerChoice" />
-    <p class="">Moves Left: {{ 10 - moves }}</p>
-    <p>{{ choiceStatus }}</p>
-    <p class="">{{ result }}</p>
-    <p class="">Player Score: {{ playerScore }}</p>
-    <p class="">Computer Score: {{ computerScore }}</p>
   </div>
 </template>
 
 <script>
 import GameToken from "./components/GameToken.vue";
+import Header from "./components/Header.vue";
+import Footer from "./components/Footer.vue";
 export default {
   components: {
     GameToken,
+    Header,
+    Footer,
   },
   data() {
     return {
