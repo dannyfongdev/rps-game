@@ -47,9 +47,6 @@ export default {
       this.computerChoice = computerOptions[choiceNumber];
       this.winner(playerChoice, this.computerChoice);
       this.moves++;
-      if (this.moves === 10) {
-        this.gameOver();
-      }
     },
     winner(player, computer) {
       player = player.toLowerCase();
