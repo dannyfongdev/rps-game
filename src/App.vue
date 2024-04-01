@@ -5,10 +5,20 @@
         <Header :score="playerScore - computerScore" />
       </div>
       <div class="bg-red-100">
-        <PlayerPick @pick="handlePick" />
-        <GameToken :choice="playerChoice" />
-        <GameToken :choice="computerChoice" />
-        <p class="">{{ result }}</p>
+        <PlayerPick @pick="handlePick" v-show="playerChoice === ''" />
+        <div v-show="playerChoice && computerChoice">
+          <div class="flex">
+            <GameToken :choice="playerChoice" />
+            <GameToken :choice="computerChoice" />
+          </div>
+          <p class="">{{ result }}</p>
+          <button
+            class="bg-blue-100 px-4 py-2 rounded text-black"
+            @click="playAgain"
+          >
+            PLAY AGAIN
+          </button>
+        </div>
       </div>
       <div class="">
         <Footer />
@@ -65,6 +75,10 @@ export default {
         this.computerScore++;
         this.result = "Computer wins!";
       }
+    },
+    playAgain() {
+      this.playerChoice = "";
+      this.computerChoice = "";
     },
   },
 };
