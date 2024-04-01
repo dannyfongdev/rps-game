@@ -1,5 +1,5 @@
 <template>
-  <div :class="backgroundGradient">
+  <div :class="backgroundGradient" v-if="choice">
     <div>{{ choice }}</div>
     <img :src="imageURL" alt="game token" />
   </div>

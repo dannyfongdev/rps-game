@@ -5,27 +5,10 @@
         <Header :score="playerScore - computerScore" />
       </div>
       <div class="bg-red-100">
-        <h1>Rock, Paper, Scissors Game</h1>
-        <div class="flex gap-1">
-          <button @click="play('rock')" class="bg-blue-100 px-4 py-2 rounded">
-            Rock
-          </button>
-          <button @click="play('paper')" class="bg-blue-100 px-4 py-2 rounded">
-            Paper
-          </button>
-          <button
-            @click="play('scissors')"
-            class="bg-blue-100 px-4 py-2 rounded"
-          >
-            Scissors
-          </button>
-        </div>
+        <PlayerPick @pick="handlePick" />
+        <GameToken :choice="playerChoice" />
         <GameToken :choice="computerChoice" />
-        <p class="">Moves Left: {{ 10 - moves }}</p>
-        <p>{{ choiceStatus }}</p>
         <p class="">{{ result }}</p>
-        <p class="">Player Score: {{ playerScore }}</p>
-        <p class="">Computer Score: {{ computerScore }}</p>
       </div>
       <div class="">
         <Footer />
@@ -38,24 +21,27 @@
 import GameToken from "./components/GameToken.vue";
 import Header from "./components/Header.vue";
 import Footer from "./components/Footer.vue";
+import PlayerPick from "./components/PlayerPick.vue";
 export default {
   components: {
     GameToken,
     Header,
     Footer,
+    PlayerPick,
   },
   data() {
     return {
       playerScore: 0,
       computerScore: 0,
       moves: 0,
-      result: "",
-      choiceStatus: "Let's Play!",
+      result: "Let's Play!",
       computerChoice: "",
+      playerChoice: "",
     };
   },
   methods: {
-    play(playerChoice) {
+    handlePick(playerChoice) {
+      this.playerChoice = playerChoice;
       const computerOptions = ["rock", "paper", "scissors"];
       const choiceNumber = Math.floor(Math.random() * 3);
       this.computerChoice = computerOptions[choiceNumber];
@@ -66,7 +52,6 @@ export default {
       }
     },
     winner(player, computer) {
-      this.choiceStatus = "Computer plays " + computer;
       player = player.toLowerCase();
       computer = computer.toLowerCase();
 
@@ -83,9 +68,6 @@ export default {
         this.computerScore++;
         this.result = "Computer wins!";
       }
-    },
-    gameOver() {
-      alert("Game Over!");
     },
   },
 };
