@@ -1,8 +1,13 @@
 <template>
-  <div class="rounded-full p-4" :class="backgroundGradient" v-show="choice">
-    <div v-show="false">{{ choice }}</div>
-    <div class="bg-white rounded-full p-4">
-      <img :src="imageURL" alt="game token" />
+  <div
+    class="bg-transparent"
+    :class="[winner === choice ? 'animate-bounce' : '']"
+  >
+    <div class="rounded-full p-4" :class="backgroundGradient" v-show="choice">
+      <div v-show="false">{{ choice }}</div>
+      <div class="bg-white rounded-full p-4">
+        <img :src="imageURL" alt="game token" />
+      </div>
     </div>
   </div>
 </template>
@@ -10,7 +15,8 @@
 <script>
 export default {
   props: {
-    choice: String,
+    choice: "",
+    winner: "",
   },
   computed: {
     imageURL() {

@@ -7,17 +7,19 @@
       <div class="bg-red-100">
         <PlayerPick @pick="handlePick" v-show="playerChoice === ''" />
         <div v-show="playerChoice && computerChoice">
-          <div class="flex">
-            <GameToken :choice="playerChoice" />
-            <GameToken :choice="computerChoice" />
+          <div class="flex justify-center items-center gap-x-10 p-10">
+            <GameToken :choice="playerChoice" :winner="theWinner" />
+            <div>
+              <p class="text-center">{{ result }}</p>
+              <button
+                class="bg-blue-100 px-4 py-2 rounded text-black"
+                @click="playAgain"
+              >
+                PLAY AGAIN
+              </button>
+            </div>
+            <GameToken :choice="computerChoice" :winner="theWinner" />
           </div>
-          <p class="">{{ result }}</p>
-          <button
-            class="bg-blue-100 px-4 py-2 rounded text-black"
-            @click="playAgain"
-          >
-            PLAY AGAIN
-          </button>
         </div>
       </div>
       <div class="">
@@ -47,6 +49,7 @@ export default {
       result: "Let's Play!",
       computerChoice: "",
       playerChoice: "",
+      theWinner: "",
     };
   },
   methods: {
@@ -64,6 +67,7 @@ export default {
 
       if (player === computer) {
         this.result = "It's a draw!";
+        this.theWinner = "";
       } else if (
         (player === "rock" && computer === "scissors") ||
         (player === "paper" && computer === "rock") ||
@@ -71,9 +75,11 @@ export default {
       ) {
         this.playerScore++;
         this.result = "You win!";
+        this.theWinner = player;
       } else {
         this.computerScore++;
-        this.result = "Computer wins!";
+        this.result = "House wins!";
+        this.theWinner = computer;
       }
     },
     playAgain() {
