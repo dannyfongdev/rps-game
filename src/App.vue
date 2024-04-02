@@ -1,7 +1,7 @@
 <template>
-  <div class="">
+  <div class="gradient-board">
     <div
-      class="h-[100vh] grid grid-rows-[auto_1fr] gradient-board text-[#FFF] justify-center items-center"
+      class="h-[100vh] mx-auto grid grid-rows-[auto_1fr] text-[#FFF] justify-center items-center"
     >
       <div class="">
         <Header :score="playerScore - computerScore" />
