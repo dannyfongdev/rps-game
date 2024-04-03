@@ -1,25 +1,13 @@
 <template>
   <div
-    class="flex flex-col justify-center items-center h-full bg-[url('/images/bg-triangle.svg')] bg-cover bg-center"
+    class="flex flex-col justify-center items-center gap-[14px] border-white _border"
   >
-    <div class="flex justify-between -_mt-10">
-      <GameToken
-        choice="paper"
-        @click="play('paper')"
-        class="bg-blue-100 px-4 py-2 rounded"
-      />
-      <GameToken
-        choice="scissors"
-        @click="play('scissors')"
-        class="bg-blue-100 px-4 py-2 rounded"
-      />
+    <div class="flex justify-between w-[314px]">
+      <GameToken choice="paper" @click="play('paper')" />
+      <GameToken choice="scissors" @click="play('scissors')" />
     </div>
-    <div class="-_mb-10">
-      <GameToken
-        choice="rock"
-        @click="play('rock')"
-        class="bg-blue-100 px-4 py-2 rounded"
-      />
+    <div class="">
+      <GameToken choice="rock" @click="play('rock')" />
     </div>
   </div>
 </template>
