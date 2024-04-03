@@ -5,7 +5,10 @@
   >
     <div class="rounded-full p-4" :class="backgroundGradient" v-show="choice">
       <div v-show="false">{{ choice }}</div>
-      <div class="bg-white rounded-full p-6 w-[100px] h-[100px] flex">
+      <div
+        class="bg-white rounded-full w-[100px] h-[100px] flex"
+        :class="choice === 'rock' ? 'p-7' : 'p-6'"
+      >
         <img class="" :src="imageURL" alt="game token" />
       </div>
     </div>
