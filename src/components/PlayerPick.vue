@@ -1,7 +1,7 @@
 <template>
   <div class="relative flex items-center justify-center">
     <div class="absolute p-12 w-[314px]">
-      <img src="/public/images/bg-triangle.svg" alt="background triangle" />
+      <img src="/images/bg-triangle.svg" alt="background triangle" />
     </div>
     <div
       class="absolute flex flex-col justify-center items-center gap-[14px] border-white _border"

@@ -8,9 +8,13 @@
       </div>
       <div class="">
         <PlayerPick @pick="handlePick" v-show="playerChoice === ''" />
+        <WaitComputer
+          @close="computerPick"
+          v-if="playerChoice && !computerChoice"
+        />
         <Winner
           @playAgain="playAgain"
-          v-show="playerChoice && computerChoice"
+          v-if="playerChoice && computerChoice"
           :playerChoice
           :computerChoice
           :theWinner
@@ -30,6 +34,8 @@ import Header from "./components/Header.vue";
 import Footer from "./components/Footer.vue";
 import PlayerPick from "./components/PlayerPick.vue";
 import Winner from "./components/Winner.vue";
+import WaitComputer from "./components/WaitComputer.vue";
+
 export default {
   components: {
     GameToken,
@@ -37,6 +43,7 @@ export default {
     Footer,
     PlayerPick,
     Winner,
+    WaitComputer,
   },
   data() {
     return {
@@ -52,6 +59,8 @@ export default {
   methods: {
     handlePick(playerChoice) {
       this.playerChoice = playerChoice;
+    },
+    computerPick() {
       const computerOptions = ["rock", "paper", "scissors"];
       const choiceNumber = Math.floor(Math.random() * 3);
       this.computerChoice = computerOptions[choiceNumber];
