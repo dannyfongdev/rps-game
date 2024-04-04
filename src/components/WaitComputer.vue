@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="flex justify-between w-[314px]">
     <p>This component will close after 2000ms.</p>
   </div>
 </template>
@@ -12,7 +12,6 @@ export default {
     };
   },
   mounted() {
-    // Hide the component after 2000ms
     setTimeout(() => {
       this.handleClose();
     }, 2000);

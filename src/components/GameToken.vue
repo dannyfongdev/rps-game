@@ -4,13 +4,11 @@
     :class="[winner === choice ? 'animate-bounce' : '']"
   >
     <div class="rounded-full p-4" :class="backgroundGradient" v-show="choice">
-      <div v-show="false">{{ choice }}</div>
-      <div
-        class="bg-white rounded-full w-[100px] h-[100px] flex"
-        :class="choice === 'rock' ? 'p-7' : 'p-6'"
-      >
-        <img class="" :src="imageURL" alt="game token" />
-      </div>
+      <img
+        class="w-32 bg-white rounded-full"
+        :src="imageURL"
+        alt="game token"
+      />
     </div>
   </div>
 </template>
