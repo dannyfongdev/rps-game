@@ -5,7 +5,7 @@
   >
     <div class="rounded-full p-4" :class="backgroundGradient" v-show="choice">
       <img
-        class="w-32 bg-white rounded-full"
+        class="w-24 bg-white rounded-full"
         :src="imageURL"
         alt="game token"
       />

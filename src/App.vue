@@ -50,7 +50,7 @@ export default {
       playerScore: 0,
       computerScore: 0,
       moves: 0,
-      result: "Let's Play!",
+      result: "",
       computerChoice: "",
       playerChoice: "",
       theWinner: "",
@@ -64,12 +64,13 @@ export default {
       const computerOptions = ["rock", "paper", "scissors"];
       const choiceNumber = Math.floor(Math.random() * 3);
       this.computerChoice = computerOptions[choiceNumber];
-      this.winner(playerChoice, this.computerChoice);
+      this.winner(this.playerChoice, this.computerChoice);
       this.moves++;
     },
     winner(player, computer) {
       player = player.toLowerCase();
       computer = computer.toLowerCase();
+      // console.log(player, computer);
 
       if (player === computer) {
         this.result = "DRAW";
