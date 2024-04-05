@@ -3,15 +3,17 @@
     class="bg-transparent"
     :class="[winner === choice ? 'animate-bounce' : '']"
   > -->
-  <img :src="imageURL" alt="game token" class="w-32" />
+  <img :src="imageURL" alt="game token" class="w-32" :class="animationClass" />
   <!-- </div> -->
 </template>
 
 <script>
 export default {
   props: {
-    choice: "",
-    winner: "",
+    choice: String,
+    winner: String,
+    mode: String,
+    delay: "0",
   },
   computed: {
     imageURL() {
@@ -20,6 +22,31 @@ export default {
     backgroundGradient() {
       return "gradient-" + this.choice;
     },
+    animationClass() {
+      if (this.mode === "pick") {
+        return (
+          "cursor-pointer hover:opacity-50 inset-0 transform scale-0 animate-scale-up transition duration-300 ease-in-out delay-" +
+          this.delay
+        );
+      } else {
+        return "";
+      }
+    },
   },
 };
 </script>
+
+<style>
+@keyframes scale-up {
+  0% {
+    transform: scale(0);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.animate-scale-up {
+  animation: scale-up 0.5s ease-in-out forwards;
+}
+</style>

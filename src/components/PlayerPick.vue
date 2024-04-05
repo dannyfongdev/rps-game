@@ -5,11 +5,26 @@
     </div>
     <div class="absolute flex flex-col justify-center items-center gap-[14px]">
       <div class="flex justify-between w-[314px]">
-        <GameToken choice="paper" @click="play('paper')" />
-        <GameToken choice="scissors" @click="play('scissors')" />
+        <GameToken
+          mode="pick"
+          choice="paper"
+          @click="play('paper')"
+          delay="0"
+        />
+        <GameToken
+          mode="pick"
+          choice="scissors"
+          @click="play('scissors')"
+          delay="300"
+        />
       </div>
       <div>
-        <GameToken choice="rock" @click="play('rock')" />
+        <GameToken
+          mode="pick"
+          choice="rock"
+          @click="play('rock')"
+          delay="600"
+        />
       </div>
     </div>
   </div>
@@ -27,3 +42,18 @@ export default {
   },
 };
 </script>
+
+<style>
+@keyframes scale-up {
+  0% {
+    transform: scale(0);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.animate-scale-up {
+  animation: scale-up 0.5s ease-in-out forwards;
+}
+</style>
