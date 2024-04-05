@@ -1,7 +1,7 @@
 <template>
   <div class="gradient-board">
     <div
-      class="h-[100vh] mx-auto grid grid-rows-[auto_1fr] text-[#FFF] justify-center items-center"
+      class="h-[100vh] mx-auto grid grid-rows-[auto_1fr] text-[#FFF] justify-center items-start"
     >
       <div class="">
         <Header :score="playerScore - computerScore" />
@@ -9,6 +9,7 @@
       <div class="">
         <PlayerPick @pick="handlePick" v-show="playerChoice === ''" />
         <WaitComputer
+          :playerChoice="playerChoice"
           @close="computerPick"
           v-if="playerChoice && !computerChoice"
         />

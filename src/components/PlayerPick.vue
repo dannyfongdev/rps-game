@@ -1,16 +1,14 @@
 <template>
-  <div class="relative flex items-center justify-center">
-    <div class="absolute p-12 w-[314px]">
+  <div class="relative w-[314px]">
+    <div class="absolute p-12">
       <img src="/images/bg-triangle.svg" alt="background triangle" />
     </div>
-    <div
-      class="absolute flex flex-col justify-center items-center gap-[14px] border-white _border"
-    >
+    <div class="absolute flex flex-col justify-center items-center gap-[14px]">
       <div class="flex justify-between w-[314px]">
         <GameToken choice="paper" @click="play('paper')" />
         <GameToken choice="scissors" @click="play('scissors')" />
       </div>
-      <div class="">
+      <div>
         <GameToken choice="rock" @click="play('rock')" />
       </div>
     </div>

@@ -10,12 +10,12 @@
         <p>THE HOUSE PICKED</p>
       </div>
     </div>
-    <div class="flex flex-col justify-center">
+    <div class="flex flex-col justify-center" v-show="showButton">
       <div class="text-center text-4xl uppercase font-bold mb-6">
         {{ result }}
       </div>
       <button
-        class="bg-blue-100 px-4 py-2 rounded-lg text-dark-text w-8/12 mx-auto"
+        class="bg-blue-100 px-4 py-2 rounded-lg text-dark-text w-1/2 mx-auto"
         @click="handleClick"
       >
         PLAY AGAIN
@@ -45,11 +45,10 @@ export default {
       this.$emit("playAgain");
     },
   },
-  // mounted() {
-  //   setTimeout(() => {
-  //     this.showButton = true;
-  //     alert("playerChoice", this.playerChoice);
-  //   }, 2000);
-  // },
+  mounted() {
+    setTimeout(() => {
+      this.showButton = true;
+    }, 500);
+  },
 };
 </script>

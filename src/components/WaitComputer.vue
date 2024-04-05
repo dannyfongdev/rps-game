@@ -1,16 +1,22 @@
 <template>
-  <div class="flex justify-between w-[314px]">
-    <p>This component will close after 2000ms.</p>
+  <div class="w-[314px]">
+    <GameToken :choice="playerChoice" class="float-left" />
+    <GameToken choice="blank" class="float-right" />
   </div>
 </template>
 
 <script>
+import GameToken from "./GameToken.vue";
 export default {
+  props: {
+    playerChoice: String,
+  },
   data() {
     return {
       showComponent: true,
     };
   },
+  components: { GameToken },
   mounted() {
     setTimeout(() => {
       this.handleClose();
@@ -19,7 +25,6 @@ export default {
   emits: ["close"],
   methods: {
     handleClose(c) {
-      //   alert("I'm closing");
       this.$emit("close");
     },
   },
