@@ -15,16 +15,11 @@
           mode="pick"
           choice="scissors"
           @click="play('scissors')"
-          delay="300"
+          delay="1"
         />
       </div>
       <div>
-        <GameToken
-          mode="pick"
-          choice="rock"
-          @click="play('rock')"
-          delay="600"
-        />
+        <GameToken mode="pick" choice="rock" @click="play('rock')" delay="2" />
       </div>
     </div>
   </div>
@@ -42,18 +37,3 @@ export default {
   },
 };
 </script>
-
-<style>
-@keyframes scale-up {
-  0% {
-    transform: scale(0);
-  }
-  100% {
-    transform: scale(1);
-  }
-}
-
-.animate-scale-up {
-  animation: scale-up 0.5s ease-in-out forwards;
-}
-</style>
