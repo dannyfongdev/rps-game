@@ -5,21 +5,11 @@
     </div>
     <div class="absolute flex flex-col justify-center items-center gap-[14px]">
       <div class="flex justify-between w-[314px]">
-        <GameToken
-          mode="pick"
-          choice="paper"
-          @click="play('paper')"
-          delay="0"
-        />
-        <GameToken
-          mode="pick"
-          choice="scissors"
-          @click="play('scissors')"
-          delay="1"
-        />
+        <GameToken step="1" choice="paper" @click="play('paper')" />
+        <GameToken step="1" choice="scissors" @click="play('scissors')" />
       </div>
       <div>
-        <GameToken mode="pick" choice="rock" @click="play('rock')" delay="2" />
+        <GameToken step="1" choice="rock" @click="play('rock')" />
       </div>
     </div>
   </div>

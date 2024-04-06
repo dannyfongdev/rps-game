@@ -10,10 +10,13 @@
 <script>
 export default {
   props: {
+    step: String,
     choice: String,
     winner: String,
-    mode: String,
-    delay: "0",
+    player: String,
+  },
+  data() {
+    return {};
   },
   computed: {
     imageURL() {
@@ -23,21 +26,45 @@ export default {
       return "gradient-" + this.choice;
     },
     animationClass() {
-      if (this.mode === "pick") {
-        return (
-          "cursor-pointer hover:opacity-50 inset-0 transform scale-0 animate-scale-up transition duration-300 ease-in-out animate-scale-up-" +
-          this.delay
-        );
-      } else {
-        return "";
+      let myClass = "";
+      switch (this.step) {
+        // user pick, scale from 0 to 100%, stagger in
+        case "1":
+          myClass = "cursor-pointer scale-in";
+          // set delay so tokens stagger in
+          if (this.choice === "rock") {
+            myClass += " scale-delay-2";
+          } else if (this.choice === "scissors") {
+            myClass += " scale-delay-1";
+          }
+          break;
+
+        // show user pick; slide from original position to left position
+        case "2":
+          if (this.choice === "blank") {
+            // myClass = "absolute right-0";
+          } else {
+            myClass = "absolute left-0 slide-in-" + this.choice;
+          }
+          break;
+
+        // show user pick and computer pick side-by-side
+        case "3":
+          if (this.player === "house") {
+            myClass = "scale-in";
+          }
+          break;
       }
+      // console.log(this.choice, myClass);
+      return myClass;
     },
   },
 };
 </script>
 
-<style>
-@keyframes scale-up {
+<style scoped>
+/* Step 1 */
+@keyframes kf-scale-in {
   0% {
     transform: scale(0);
   }
@@ -45,17 +72,31 @@ export default {
     transform: scale(1);
   }
 }
-
-.animate-scale-up-0 {
-  animation: scale-up 0.5s ease-in-out forwards;
-  animation-delay: 0;
+.scale-in {
+  animation: kf-scale-in 500ms ease-in-out forwards;
 }
-.animate-scale-up-1 {
-  animation: scale-up 0.5s ease-in-out forwards;
+.scale-delay-1 {
   animation-delay: 100ms;
 }
-.animate-scale-up-2 {
-  animation: scale-up 0.5s ease-in-out forwards;
+.scale-delay-2 {
   animation-delay: 200ms;
+}
+
+/* Step 2 */
+@keyframes kw-scissors {
+  from {
+    transform: translateX(140px);
+  }
+}
+.slide-in-scissors {
+  animation: kw-scissors 0.5s ease-in-out forwards;
+}
+@keyframes kw-rock {
+  from {
+    transform: translate(95px, 142px);
+  }
+}
+.slide-in-rock {
+  animation: kw-rock 0.5s ease-in-out forwards;
 }
 </style>

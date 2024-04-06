@@ -6,8 +6,8 @@
       <div class="">
         <Header :score="playerScore - computerScore" />
       </div>
-      <div class="">
-        <PlayerPick @pick="handlePick" v-show="playerChoice === ''" />
+      <div class="relative">
+        <PlayerPick @pick="handlePick" v-if="playerChoice === ''" />
         <WaitComputer
           :playerChoice="playerChoice"
           @close="computerPick"
