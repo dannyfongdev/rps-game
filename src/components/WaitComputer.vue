@@ -1,5 +1,5 @@
 <template>
-  <div class="w-[314px]">
+  <div class="w-[314px] h-[314px]">
     <GameToken :choice="playerChoice" step="2" />
     <GameToken choice="blank" step="2" />
   </div>
