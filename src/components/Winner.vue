@@ -1,5 +1,49 @@
 <template>
-  <div class="">
+  <div class="w-[314px] h-[314px] relative flex flex-col z-10">
+    <!-- <div class="p-12">
+      <img src="/images/bg-triangle.svg" alt="background triangle" />
+    </div> -->
+    <div
+      class="absolute z-20 flex flex-col justify-center items-center gap-[14px]"
+    >
+      <div class="flex justify-between w-[314px]">
+        <div class="flex flex-col items-center gap-6">
+          <GameToken
+            :choice="playerChoice"
+            :winner="theWinner"
+            step="3"
+            player="you"
+          />
+          <p class="scale-0 you-label-in">YOU PICKED</p>
+        </div>
+        <div class="flex flex-col items-center gap-6">
+          <GameToken
+            :choice="computerChoice"
+            :winner="theWinner"
+            step="3"
+            player="house"
+          />
+          <p class="scale-0 house-label-in">THE HOUSE PICKED</p>
+        </div>
+      </div>
+    </div>
+    <div class="absolute bottom-0 flex flex-col justify-center w-[314px]">
+      <div
+        class="text-center text-4xl uppercase font-bold mb-6 scale-0 message-in"
+      >
+        {{ result }}
+      </div>
+      <button
+        class="bg-blue-100 px-4 py-2 rounded-lg text-dark-text w-1/2 mx-auto"
+        :class="showButton ? 'visible' : 'invisible'"
+        @click="handleClick"
+      >
+        PLAY AGAIN
+      </button>
+    </div>
+  </div>
+
+  <!-- <div class="">
     <div class="flex justify-between mb-20">
       <div class="flex flex-col items-center gap-6">
         <GameToken
@@ -34,7 +78,7 @@
         PLAY AGAIN
       </button>
     </div>
-  </div>
+  </div> -->
 </template>
 
 <script>

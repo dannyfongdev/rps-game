@@ -1,5 +1,5 @@
 <template>
-  <div class="h-[148px] flex items-center">FOOTER</div>
+  <div class="h-[96px] flex items-center">FOOTER</div>
 </template>
 
 <script></script>

@@ -1,9 +1,11 @@
 <template>
-  <div class="relative w-[314px]">
-    <div class="absolute p-12">
+  <div class="w-[314px] h-[314px] relative flex flex-col z-10">
+    <div class="p-12">
       <img src="/images/bg-triangle.svg" alt="background triangle" />
     </div>
-    <div class="absolute flex flex-col justify-center items-center gap-[14px]">
+    <div
+      class="absolute z-20 flex flex-col justify-center items-center gap-[14px]"
+    >
       <div class="flex justify-between w-[314px]">
         <GameToken step="1" choice="paper" @click="play('paper')" />
         <GameToken step="1" choice="scissors" @click="play('scissors')" />

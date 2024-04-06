@@ -1,9 +1,9 @@
 <template>
   <div class="gradient-board">
     <div
-      class="h-[100vh] mx-auto grid grid-rows-[auto_1fr] text-[#FFF] justify-center items-start"
+      class="mx-auto h-svh w- grid grid-rows-[auto_1fr] text-[#FFF] justify-center items-center"
     >
-      <div class="">
+      <div>
         <Header :score="playerScore - computerScore" />
       </div>
       <div class="relative">
@@ -22,7 +22,7 @@
           :result
         />
       </div>
-      <div class="">
+      <div>
         <Footer />
       </div>
     </div>
