@@ -1,7 +1,7 @@
 <template>
   <div class="w-[314px]">
-    <GameToken :choice="playerChoice" class="float-left" />
-    <GameToken choice="blank" class="float-right" />
+    <GameToken :choice="playerChoice" step="2" />
+    <GameToken choice="blank" step="2" />
   </div>
 </template>
 
@@ -11,20 +11,15 @@ export default {
   props: {
     playerChoice: String,
   },
-  data() {
-    return {
-      showComponent: true,
-    };
-  },
   components: { GameToken },
   mounted() {
     setTimeout(() => {
       this.handleClose();
-    }, 2000);
+    }, 500);
   },
   emits: ["close"],
   methods: {
-    handleClose(c) {
+    handleClose() {
       this.$emit("close");
     },
   },
