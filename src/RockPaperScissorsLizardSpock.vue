@@ -85,8 +85,15 @@ export default {
         this.theWinner = "";
       } else if (
         (player === "rock" && computer === "scissors") ||
+        (player === "rock" && computer === "lizard") ||
         (player === "paper" && computer === "rock") ||
-        (player === "scissors" && computer === "paper")
+        (player === "paper" && computer === "spock") ||
+        (player === "scissors" && computer === "paper") ||
+        (player === "scissors" && computer === "lizard") ||
+        (player === "lizard" && computer === "spock") ||
+        (player === "lizard" && computer === "paper") ||
+        (player === "spock" && computer === "rock") ||
+        (player === "spock" && computer === "scissors")
       ) {
         this.playerScore++;
         this.result = "YOU WIN";
