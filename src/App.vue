@@ -23,10 +23,11 @@
         />
       </div>
       <div>
-        <Footer />
+        <Footer @rules="openRules" />
       </div>
     </div>
   </div>
+  <Rules v-if="showRules" @close="closeRules" class="absolute top-0 z-50" />
 </template>
 
 <script>
@@ -36,6 +37,7 @@ import Footer from "./components/Footer.vue";
 import PlayerPick from "./components/PlayerPick.vue";
 import Winner from "./components/Winner.vue";
 import WaitComputer from "./components/WaitComputer.vue";
+import Rules from "./components/Rules.vue";
 
 export default {
   components: {
@@ -45,6 +47,7 @@ export default {
     PlayerPick,
     Winner,
     WaitComputer,
+    Rules,
   },
   data() {
     return {
@@ -55,7 +58,11 @@ export default {
       computerChoice: "",
       playerChoice: "",
       theWinner: "",
+      showRules: false,
     };
+  },
+  mounted() {
+    // this.$refs.rulesDialog.showModal();
   },
   methods: {
     handlePick(playerChoice) {
@@ -93,6 +100,12 @@ export default {
     playAgain() {
       this.playerChoice = "";
       this.computerChoice = "";
+    },
+    closeRules() {
+      this.showRules = false;
+    },
+    openRules() {
+      this.showRules = true;
     },
   },
 };

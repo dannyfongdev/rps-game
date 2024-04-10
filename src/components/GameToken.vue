@@ -1,12 +1,13 @@
 <template>
-  <!-- <div
-    class="bg-transparent"
-    :class="[winner === choice ? 'animate-bounce' : '']"
-  > -->
-  <img :src="imageURL" alt="game token" class="w-32" :class="animationClass" />
-  <!-- </div> -->
+  <div class="bg-transparent">
+    <img
+      :src="imageURL"
+      alt="game token"
+      class="w-32"
+      :class="animationClass"
+    />
+  </div>
 </template>
-
 <script>
 export default {
   props: {
@@ -50,7 +51,9 @@ export default {
 
         // show user pick and computer pick side-by-side
         case "3":
-          if (this.player === "house") {
+          if (this.choice === this.winner) {
+            myClass += " animate-bounce";
+          } else if (this.player === "house") {
             myClass = "scale-in";
           }
           break;

@@ -1,5 +1,21 @@
 <template>
-  <div class="h-[96px] flex items-center">FOOTER</div>
+  <div class="h-[96px] flex items-center">
+    <button
+      @click="handleClick"
+      class="mx-auto border-2 px-10 py-2 border-header-outline rounded-lg"
+    >
+      RULES
+    </button>
+  </div>
 </template>
 
-<script></script>
+<script>
+export default {
+  emits: ["rules"],
+  methods: {
+    handleClick() {
+      this.$emit("rules");
+    },
+  },
+};
+</script>
