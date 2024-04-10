@@ -2,7 +2,9 @@
   <div
     class="flex justify-between items-center h-[96px] w-[314px] border-4 border-header-outline rounded-lg mt-8 mb-8 p-6"
   >
-    <div class="leading-[.85] text-xl">ROCK<br />PAPER<br />SCISSORS</div>
+    <div class="leading-[.85] text-xl cursor-pointer" @click="handleClick">
+      ROCK<br />PAPER<br />SCISSORS
+    </div>
     <div
       class="flex flex-col justify-center items-center rounded-md bg-white w-[86px] h-[72px] -mr-3"
     >
@@ -14,5 +16,11 @@
 <script>
 export default {
   props: { score: Number },
+  emits: ["toggle"],
+  methods: {
+    handleClick() {
+      this.$emit("toggle");
+    },
+  },
 };
 </script>

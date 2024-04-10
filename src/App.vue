@@ -1,6 +1,6 @@
 <template>
-  <RockPaperScissorsLizardSpock />
-  <!-- <RockPaperScissors /> -->
+  <RockPaperScissorsLizardSpock v-if="showLizardSpock" @toggle="toggleGame" />
+  <RockPaperScissors v-if="showLizardSpock === false" @toggle="toggleGame" />
 </template>
 
 <script>
@@ -11,6 +11,17 @@ export default {
   components: {
     RockPaperScissors,
     RockPaperScissorsLizardSpock,
+  },
+  data() {
+    return {
+      showLizardSpock: Boolean,
+    };
+  },
+  methods: {
+    toggleGame() {
+      console.log(this.showLizardSpock);
+      this.showLizardSpock = !this.showLizardSpock;
+    },
   },
 };
 </script>

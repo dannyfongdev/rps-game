@@ -4,7 +4,7 @@
       class="mx-auto h-svh w- grid grid-rows-[auto_1fr] text-[#FFF] justify-center items-center"
     >
       <div>
-        <Header :score="playerScore - computerScore" />
+        <Header @toggle="handleToggle" :score="playerScore - computerScore" />
       </div>
       <div class="relative">
         <PlayerPick @pick="handlePick" v-if="playerChoice === ''" />
@@ -49,6 +49,7 @@ export default {
     WaitComputer,
     Rules,
   },
+  emits: ["toggle"],
   data() {
     return {
       playerScore: 0,
@@ -106,6 +107,9 @@ export default {
     },
     openRules() {
       this.showRules = true;
+    },
+    handleToggle() {
+      this.$emit("toggle");
     },
   },
 };

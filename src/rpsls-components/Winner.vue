@@ -66,7 +66,7 @@ export default {
     },
   },
   mounted() {
-    console.log(this.playerChoice, this.computerChoice);
+    // console.log(this.playerChoice, this.computerChoice);
     setTimeout(() => {
       this.showButton = true;
     }, 1500);

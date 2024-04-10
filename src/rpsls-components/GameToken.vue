@@ -1,11 +1,6 @@
 <template>
   <div class="bg-transparent">
-    <img
-      :src="imageURL"
-      alt="game token"
-      class="w-24"
-      :class="animationClass"
-    />
+    <img :src="imageURL" alt="game token" :class="animationClass" />
   </div>
 </template>
 <script>
@@ -31,7 +26,7 @@ export default {
       switch (this.step) {
         // user pick, scale from 0 to 100%, stagger in
         case "1":
-          myClass = "cursor-pointer scale-in";
+          myClass = "w-24 cursor-pointer scale-in";
           // set delay so tokens stagger in
           if (this.choice === "rock") {
             myClass += " scale-delay-2";
@@ -45,7 +40,7 @@ export default {
           if (this.choice === "blank") {
             // myClass = "absolute right-0";
           } else {
-            myClass = "absolute left-0 slide-in-" + this.choice;
+            myClass = "w-32 absolute left-0 slide-in-" + this.choice;
           }
           break;
 
@@ -56,6 +51,7 @@ export default {
           } else if (this.player === "house") {
             myClass = "scale-in";
           }
+          myClass += " w-32";
           break;
       }
       // console.log(this.choice, myClass);
@@ -88,7 +84,7 @@ export default {
 /* Step 2 */
 @keyframes kw-scissors {
   from {
-    transform: translateX(140px);
+    transform: translateX(110px);
   }
 }
 .slide-in-scissors {
@@ -96,10 +92,34 @@ export default {
 }
 @keyframes kw-rock {
   from {
-    transform: translate(95px, 142px);
+    transform: translate(115px, 172px);
   }
 }
 .slide-in-rock {
   animation: kw-rock 0.5s ease-in-out forwards;
+}
+@keyframes kw-paper {
+  from {
+    transform: translate(215px, 72px);
+  }
+}
+.slide-in-paper {
+  animation: kw-paper 0.5s ease-in-out forwards;
+}
+@keyframes kw-lizard {
+  from {
+    transform: translate(45px, 172px);
+  }
+}
+.slide-in-lizard {
+  animation: kw-lizard 0.5s ease-in-out forwards;
+}
+@keyframes kw-spock {
+  from {
+    transform: translateY(72px);
+  }
+}
+.slide-in-spock {
+  animation: kw-spock 0.5s ease-in-out forwards;
 }
 </style>
