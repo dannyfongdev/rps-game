@@ -3,12 +3,12 @@
     <div
       class="absolute z-20 flex flex-col justify-center items-center gap-[14px]"
     >
-      <div class="flex justify-between w-[314px] lg:w-[940px] lg:self-center">
+      <div class="flex justify-between w-[314px] lg:w-[700px]">
         <div class="flex flex-col items-center gap-6">
           <GameToken
             :choice="playerChoice"
             :winner="theWinner"
-            step="4"
+            step="3"
             player="you"
           />
           <p class="scale-0 you-label-in">YOU PICKED</p>
@@ -17,26 +17,12 @@
           <GameToken
             :choice="computerChoice"
             :winner="theWinner"
-            step="4"
+            step="3"
             player="house"
           />
           <p class="scale-0 house-label-in">THE HOUSE PICKED</p>
         </div>
       </div>
-    </div>
-    <div class="absolute bottom-0 flex flex-col justify-center w-[314px]">
-      <div
-        class="text-center text-4xl uppercase font-bold mb-6 scale-0 message-in"
-      >
-        {{ result }}
-      </div>
-      <button
-        class="bg-blue-100 px-4 py-2 rounded-lg text-dark-text w-1/2 mx-auto"
-        :class="showButton ? 'visible' : 'invisible'"
-        @click="handleClick"
-      >
-        PLAY AGAIN
-      </button>
     </div>
   </div>
 </template>
@@ -51,22 +37,19 @@ export default {
     result: String,
   },
   data() {
-    return {
-      showButton: false,
-    };
+    return {};
   },
   components: { GameToken },
-  emits: ["playAgain"],
-  methods: {
-    handleClick() {
-      this.$emit("playAgain");
-    },
-  },
+  emits: ["close"],
   mounted() {
-    // console.log(this.playerChoice, this.computerChoice);
     setTimeout(() => {
-      this.showButton = true;
+      this.handleClose();
     }, 1500);
+  },
+  methods: {
+    handleClose() {
+      this.$emit("close");
+    },
   },
 };
 </script>

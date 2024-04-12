@@ -47,6 +47,11 @@ export default {
 
         // show user pick and computer pick side-by-side
         case "3":
+          myClass = " w-32 lg:w-[290px]";
+          break;
+
+        // show result and play-again button
+        case "4":
           if (this.choice === this.winner) {
             myClass += " animate-bounce";
           } else if (this.player === "house") {

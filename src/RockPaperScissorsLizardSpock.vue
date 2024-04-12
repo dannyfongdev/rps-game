@@ -9,13 +9,19 @@
       <div class="relative">
         <PlayerPick @pick="handlePick" v-if="playerChoice === ''" />
         <WaitComputer
-          :playerChoice="playerChoice"
+          :playerChoice
           @close="computerPick"
           v-if="playerChoice && !computerChoice"
         />
+        <WaitComputerShow
+          :playerChoice
+          :computerChoice
+          @close="computerPickDone"
+          v-if="playerChoice && computerChoice && !showWinner"
+        />
         <Winner
           @playAgain="playAgain"
-          v-if="playerChoice && computerChoice"
+          v-if="showWinner"
           :playerChoice
           :computerChoice
           :theWinner
@@ -37,6 +43,7 @@ import Footer from "./rpsls-components/Footer.vue";
 import PlayerPick from "./rpsls-components/PlayerPick.vue";
 import Winner from "./rpsls-components/Winner.vue";
 import WaitComputer from "./rpsls-components/WaitComputer.vue";
+import WaitComputerShow from "./rpsls-components/WaitComputerShow.vue";
 import Rules from "./rpsls-components/Rules.vue";
 
 export default {
@@ -47,6 +54,7 @@ export default {
     PlayerPick,
     Winner,
     WaitComputer,
+    WaitComputerShow,
     Rules,
   },
   emits: ["toggle"],
@@ -59,6 +67,7 @@ export default {
       computerChoice: "",
       playerChoice: "",
       theWinner: "",
+      showWinner: false,
       showRules: false,
     };
   },
@@ -75,6 +84,10 @@ export default {
       this.computerChoice = computerOptions[choiceNumber];
       this.winner(this.playerChoice, this.computerChoice);
       this.moves++;
+    },
+    computerPickDone() {
+      this.showWinner = true;
+      console.log("setting showWinner", this.showWinner);
     },
     winner(player, computer) {
       player = player.toLowerCase();
