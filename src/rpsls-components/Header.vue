@@ -1,18 +1,18 @@
 <template>
   <div
-    class="flex justify-between items-center h-[96px] w-[314px] border-4 border-header-outline rounded-lg mt-8 mb-8 p-6 md:w-[700px] md:h-[150px]"
+    class="flex justify-between items-center h-[96px] w-[314px] border-4 border-header-outline rounded-lg mt-8 mb-8 p-6 lg:w-[700px] lg:h-[150px]"
   >
-    <div class="leading-[.85] text-md cursor-pointer" @click="handleClick">
+    <div class="leading-[.85] text-lg cursor-pointer" @click="handleClick">
       ROCK<br />PAPER<br />SCISSORS<br />LIZARD<br />SPOCK
     </div>
     <div
-      class="flex flex-col justify-center items-center rounded-md bg-white w-[86px] h-[72px] -mr-3 md:h-[110px] md:w-[150px]"
+      class="flex flex-col justify-center items-center rounded-lg bg-white w-[86px] h-[72px] -mr-3 lg:h-[110px] lg:w-[150px]"
     >
-      <div class="text-score-text text-xs tracking-wider md:text-lg md:-mt-2">
+      <div class="text-score-text text-xs tracking-wider lg:text-lg lg:-mt-2">
         SCORE
       </div>
       <div
-        class="text-dark-text text-4xl font-black md:text-7xl md:leading-[.7]"
+        class="text-dark-text text-4xl font-black lg:text-7xl lg:leading-[.7]"
       >
         {{ score }}
       </div>

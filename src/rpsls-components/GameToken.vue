@@ -26,7 +26,7 @@ export default {
       switch (this.step) {
         // user pick, scale from 0 to 100%, stagger in
         case "1":
-          myClass = "w-24 md:w-36 cursor-pointer scale-in";
+          myClass = "w-24 lg:w-36 cursor-pointer scale-in";
           // set delay so tokens stagger in
           if (this.choice === "rock") {
             myClass += " scale-delay-2";
@@ -40,7 +40,8 @@ export default {
           if (this.choice === "blank") {
             // myClass = "absolute right-0";
           } else {
-            myClass = "w-32 absolute left-0 slide-in-" + this.choice;
+            myClass =
+              "w-32 lg:w-[290px] absolute left-0 slide-in-" + this.choice;
           }
           break;
 
@@ -51,7 +52,7 @@ export default {
           } else if (this.player === "house") {
             myClass = "scale-in";
           }
-          myClass += " w-32";
+          myClass += " w-32 lg:w-[290px]";
           break;
       }
       // console.log(this.choice, myClass);

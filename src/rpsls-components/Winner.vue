@@ -1,12 +1,9 @@
 <template>
-  <div class="w-[314px] h-[314px] relative flex flex-col z-10">
-    <!-- <div class="p-12">
-      <img src="/images/bg-triangle.svg" alt="background triangle" />
-    </div> -->
+  <div class="w-[314px] h-[314px] relative flex flex-col z-10 lg:w-auto">
     <div
       class="absolute z-20 flex flex-col justify-center items-center gap-[14px]"
     >
-      <div class="flex justify-between w-[314px]">
+      <div class="flex justify-between w-[314px] lg:w-[940px] lg:self-center">
         <div class="flex flex-col items-center gap-6">
           <GameToken
             :choice="playerChoice"
