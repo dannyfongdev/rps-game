@@ -4,7 +4,7 @@
       class="absolute z-20 flex flex-col justify-center items-center gap-[14px]"
     >
       <div class="flex justify-between w-[314px] lg:w-[700px]">
-        <div class="flex flex-col items-center gap-6">
+        <div class="flex flex-col items-center gap-6 lg:flex-col-reverse">
           <GameToken
             :choice="playerChoice"
             :winner="theWinner"
@@ -13,7 +13,7 @@
           />
           <p class="scale-0 you-label-in">YOU PICKED</p>
         </div>
-        <div class="flex flex-col items-center gap-6">
+        <div class="flex flex-col items-center gap-6 lg:flex-col-reverse">
           <GameToken
             :choice="computerChoice"
             :winner="theWinner"

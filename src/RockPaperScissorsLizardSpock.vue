@@ -121,6 +121,7 @@ export default {
     playAgain() {
       this.playerChoice = "";
       this.computerChoice = "";
+      this.showWinner = "";
     },
     closeRules() {
       this.showRules = false;

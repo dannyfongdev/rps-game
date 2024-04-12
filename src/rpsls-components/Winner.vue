@@ -1,42 +1,40 @@
 <template>
-  <div class="w-[314px] h-[314px] relative flex flex-col z-10 lg:w-auto">
-    <div
-      class="absolute z-20 flex flex-col justify-center items-center gap-[14px]"
-    >
-      <div class="flex justify-between w-[314px] lg:w-[940px] lg:self-center">
-        <div class="flex flex-col items-center gap-6">
-          <GameToken
-            :choice="playerChoice"
-            :winner="theWinner"
-            step="4"
-            player="you"
-          />
-          <p class="scale-0 you-label-in">YOU PICKED</p>
-        </div>
-        <div class="flex flex-col items-center gap-6">
-          <GameToken
-            :choice="computerChoice"
-            :winner="theWinner"
-            step="4"
-            player="house"
-          />
-          <p class="scale-0 house-label-in">THE HOUSE PICKED</p>
-        </div>
-      </div>
+  <div class="grid grid-cols-2 w-[314px] h-[314px] lg:grid-cols-3 lg:w-[940px]">
+    <div class="flex flex-col items-center gap-6 lg:flex-col-reverse">
+      <GameToken
+        :choice="playerChoice"
+        :winner="theWinner"
+        step="4"
+        player="you"
+      />
+      <p class="scale-0 you-label-in">YOU PICKED</p>
     </div>
-    <div class="absolute bottom-0 flex flex-col justify-center w-[314px]">
-      <div
-        class="text-center text-4xl uppercase font-bold mb-6 scale-0 message-in"
-      >
-        {{ result }}
+    <div class="flex flex-col items-center gap-6 lg:flex-col-reverse">
+      <GameToken
+        :choice="computerChoice"
+        :winner="theWinner"
+        step="4"
+        player="house"
+      />
+      <p class="scale-0 house-label-in">THE HOUSE PICKED</p>
+    </div>
+    <div
+      class="col-span-2 mt-20 lg:col-start-2 lg:row-start-1 lg:col-span-1 lg:mt-0"
+    >
+      <div class="flex flex-col justify-center">
+        <div
+          class="text-center text-4xl uppercase font-bold mb-6 scale-0 message-in"
+        >
+          {{ result }}
+        </div>
+        <button
+          class="bg-blue-100 px-4 py-2 rounded-lg text-dark-text w-1/2 mx-auto"
+          :class="showButton ? 'visible' : 'invisible'"
+          @click="handleClick"
+        >
+          PLAY AGAIN
+        </button>
       </div>
-      <button
-        class="bg-blue-100 px-4 py-2 rounded-lg text-dark-text w-1/2 mx-auto"
-        :class="showButton ? 'visible' : 'invisible'"
-        @click="handleClick"
-      >
-        PLAY AGAIN
-      </button>
     </div>
   </div>
 </template>
