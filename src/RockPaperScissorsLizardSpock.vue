@@ -1,5 +1,5 @@
 <template>
-  <div class="gradient-board">
+  <div class="gradient-board min-h-[768px]">
     <div
       class="mx-auto h-svh w- grid grid-rows-[auto_1fr] text-[#FFF] justify-center items-center"
     >
