@@ -1,6 +1,6 @@
 <template>
   <div
-    class="flex justify-between items-center h-[96px] w-[314px] border-4 border-header-outline rounded-lg mt-8 mb-8 p-6"
+    class="flex justify-between items-center h-[96px] w-[314px] border-4 border-header-outline rounded-lg p-6"
   >
     <div class="leading-[.85] text-xl cursor-pointer" @click="handleClick">
       ROCK<br />PAPER<br />SCISSORS

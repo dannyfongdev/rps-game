@@ -1,12 +1,10 @@
 <template>
-  <div class="gradient-board">
-    <div
-      class="mx-auto h-svh w- grid grid-rows-[auto_1fr] text-[#FFF] justify-center items-center"
-    >
+  <div class="flex justify-center items-center h-svh gradient-board">
+    <div class="grid grid-rows-[auto_1fr_auto] max-h-[750px] text-white border">
       <div>
         <Header @toggle="handleToggle" :score="playerScore - computerScore" />
       </div>
-      <div class="relative">
+      <div class="flex justify-center items-center h-[400px] border">
         <PlayerPick @pick="handlePick" v-if="playerChoice === ''" />
         <WaitComputer
           :playerChoice="playerChoice"

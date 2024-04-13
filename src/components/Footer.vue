@@ -1,5 +1,5 @@
 <template>
-  <div class="h-[96px] flex items-center">
+  <div class="flex justify-center">
     <button
       @click="handleClick"
       class="mx-auto border-2 px-10 py-2 border-header-outline rounded-lg"
