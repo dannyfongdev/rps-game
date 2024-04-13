@@ -5,7 +5,8 @@
         <Header @toggle="handleToggle" :score="playerScore - computerScore" />
       </div>
       <div class="flex justify-center items-center h-[400px] border">
-        <PlayerPick @pick="handlePick" v-if="playerChoice === ''" />
+        <GameCanvas step="1" />
+        <!-- <PlayerPick @pick="handlePick" v-if="playerChoice === ''" />
         <WaitComputer
           :playerChoice="playerChoice"
           @close="computerPick"
@@ -18,7 +19,7 @@
           :computerChoice
           :theWinner
           :result
-        />
+        /> -->
       </div>
       <div>
         <Footer @rules="openRules" />
@@ -31,6 +32,7 @@
 <script>
 import GameToken from "./components/GameToken.vue";
 import Header from "./components/Header.vue";
+import GameCanvas from "./components/GameCanvas.vue";
 import Footer from "./components/Footer.vue";
 import PlayerPick from "./components/PlayerPick.vue";
 import Winner from "./components/Winner.vue";
@@ -41,6 +43,7 @@ export default {
   components: {
     GameToken,
     Header,
+    GameCanvas,
     Footer,
     PlayerPick,
     Winner,
