@@ -4,8 +4,8 @@
       <div>
         <Header @toggle="handleToggle" :score="playerScore - computerScore" />
       </div>
-      <div class="flex justify-center items-center h-[400px] border">
-        <GameCanvas step="1" />
+      <div class="flex justify-center items-center h-[428px] border">
+        <GameCanvas />
         <!-- <PlayerPick @pick="handlePick" v-if="playerChoice === ''" />
         <WaitComputer
           :playerChoice="playerChoice"
