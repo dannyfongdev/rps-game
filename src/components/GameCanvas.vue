@@ -16,14 +16,14 @@
       <div :class="tokenRock">
         <GameToken choice="rock" @click="play('rock')" />
       </div>
-      <div :class="tokenBlank">
-        <GameToken choice="blank" />
+      <div :class="tokenComputer">
+        <GameToken :choice="computerChoice" :scale-in="computerChoice" />
       </div>
       <div
-        class="border row-start-3 col-start-1 col-span-2 flex flex-col justify-center items-center h-[114px]"
+        class="border row-start-3 col-start-1 col-span-2 flex flex-col justify-center items-center h-[114px] -mt-24"
       >
         <p class="text-center text-4xl uppercase font-bold mb-6">
-          {{ result }}
+          {{ results }}
         </p>
         <button
           class="bg-blue-100 px-4 py-2 rounded-lg text-dark-text w-1/2 mx-auto"
@@ -45,6 +45,7 @@ export default {
   props: {
     step: String,
   },
+  emits: ["newScore"],
   data() {
     return {
       // game data
@@ -52,7 +53,7 @@ export default {
       playerChoice: "",
       computerScore: 0,
       playerScore: 0,
-      result: "",
+      results: "",
       theWinner: "",
 
       // for conditional showing
@@ -68,7 +69,7 @@ export default {
       tokenPaper: "hidden",
       tokenScissors: "hidden",
       tokenRock: "hidden",
-      tokenBlank: "hidden",
+      tokenComputer: "hidden",
     };
   },
   mounted() {
@@ -76,9 +77,10 @@ export default {
   },
   methods: {
     newGame() {
-      this.tokenPaper = this.position1;
-      this.tokenScissors = this.position2;
-      this.tokenRock = this.position3;
+      this.tokenPaper = this.position1 + " cursor-pointer";
+      this.tokenScissors = this.position2 + " cursor-pointer";
+      this.tokenRock = this.position3 + " cursor-pointer";
+      this.tokenComputer = "hidden";
     },
     play(choice) {
       this.playerChoice = choice;
@@ -102,36 +104,19 @@ export default {
       }
 
       // slide blank token into place
-      this.tokenBlank = this.position2 + " p-blank-token";
+      this.tokenComputer = this.position2 + " p-blank-token";
 
       // pause before show computer's choice
       setTimeout(() => {
         this.computerPick();
       }, 500);
-
-      // this.$emit("pick", choice);
     },
     computerPick() {
       const computerOptions = ["rock", "paper", "scissors"];
       const choiceNumber = Math.floor(Math.random() * 3);
       this.computerChoice = computerOptions[choiceNumber];
+      this.tokenComputer = this.position2;
       // console.log(this.computerChoice);
-
-      // slide computer's choice into place
-      switch (this.computerChoice) {
-        case "paper":
-          this.tokenBlank = "hidden";
-          this.tokenPaper = this.position2;
-          break;
-        case "scissors":
-          this.tokenBlank = "hidden";
-          this.tokenScissors = this.position2;
-          break;
-        case "rock":
-          this.tokenBlank = "hidden";
-          this.tokenRock = this.position2;
-          break;
-      }
 
       this.winner(this.playerChoice, this.computerChoice);
     },
@@ -141,7 +126,7 @@ export default {
       // console.log(player, computer);
 
       if (player === computer) {
-        this.result = "DRAW";
+        this.results = "DRAW";
         this.theWinner = "";
       } else if (
         (player === "rock" && computer === "scissors") ||
@@ -149,21 +134,24 @@ export default {
         (player === "scissors" && computer === "paper")
       ) {
         this.playerScore++;
-        this.result = "YOU WIN";
+        this.results = "YOU WIN";
         this.theWinner = player;
       } else {
         this.computerScore++;
-        this.result = "YOU LOSE";
+        this.results = "YOU LOSE";
         this.theWinner = computer;
       }
-      // console.log(this.result);
+      // console.log(this.results);
       this.showButton = true;
+
+      // send score back to parent component
+      this.$emit("newScore", this.playerScore - this.computerScore);
     },
     playAgain() {
       this.showButton = false;
       this.playerChoice = "";
       this.computerChoice = "";
-      this.result = "";
+      this.results = "";
       this.newGame();
     },
   },
