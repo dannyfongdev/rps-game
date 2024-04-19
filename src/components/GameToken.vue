@@ -3,8 +3,7 @@
     <img
       :src="imageURL"
       alt="game token"
-      class="w-32"
-      :class="animationClass"
+      :class="animationClass + ' ' + sizeClass"
     />
   </div>
 </template>
@@ -13,6 +12,7 @@ export default {
   props: {
     choice: "",
     scaleIn: "",
+    size: "",
   },
   data() {
     return {};
@@ -32,6 +32,13 @@ export default {
         return "";
       } else {
         return "scale-in";
+      }
+    },
+    sizeClass() {
+      if (this.size === "small") {
+        return "w-24";
+      } else {
+        return "w-32";
       }
     },
   },

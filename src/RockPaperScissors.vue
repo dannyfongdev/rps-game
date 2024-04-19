@@ -5,7 +5,7 @@
         <Header @toggle="handleToggle" :score="theScore" />
       </div>
       <div class="flex justify-center items-center h-[428px] border">
-        <GameCanvas @new-score="changeScore" />
+        <GameCanvas mode="rpsls" @new-score="changeScore" />
       </div>
       <div>
         <Footer @rules="openRules" />

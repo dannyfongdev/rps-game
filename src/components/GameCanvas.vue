@@ -1,30 +1,46 @@
 <template>
   <div class="flex flex-col w-[314px] h-[428px] relative z-10 overflow-hidden">
+    <!-- if playChoice is empty, game state is player pick -->
     <div v-show="!playerChoice" class="relative p-5 mt-7 z-10">
-      <img src="/images/bg-triangle.svg" alt="background triangle" />
+      <img
+        v-if="mode === 'rpsls'"
+        src="/images/bg-pentagon.svg"
+        alt="background pentagon"
+      />
+      <img v-else src="/images/bg-triangle.svg" alt="background triangle" />
     </div>
     <!-- Don't change the height of the grid container, or you will mess up the slide animations -->
-    <div
-      class="absolute grid grid-cols-2 grid-rows-[1fr_1fr_114px] items-center w-[314px] h-[428px] z-20"
-    >
+    <div :class="gridContainerClass">
       <div :class="tokenPaper">
-        <GameToken choice="paper" @click="play('paper')" />
+        <GameToken :size="tokenSize" choice="paper" @click="play('paper')" />
       </div>
       <div :class="tokenScissors">
-        <GameToken choice="scissors" @click="play('scissors')" />
+        <GameToken
+          :size="tokenSize"
+          choice="scissors"
+          @click="play('scissors')"
+        />
       </div>
       <div :class="tokenRock">
-        <GameToken choice="rock" @click="play('rock')" />
+        <GameToken :size="tokenSize" choice="rock" @click="play('rock')" />
+      </div>
+      <div :class="tokenLizard">
+        <GameToken :size="tokenSize" choice="lizard" @click="play('lizard')" />
+      </div>
+      <div :class="tokenSpock">
+        <GameToken :size="tokenSize" choice="spock" @click="play('spoke')" />
       </div>
       <div :class="tokenComputer">
         <GameToken :choice="computerChoice" :scale-in="computerChoice" />
       </div>
+      <!-- when results is empty, it doesn't show; when game is over, results is not empty and shows -->
       <div
         class="border row-start-3 col-start-1 col-span-2 flex flex-col justify-center items-center h-[114px] -mt-24"
       >
         <p class="text-center text-4xl uppercase font-bold mb-6">
           {{ results }}
         </p>
+        <!-- showButton is set based on state of game play -->
         <button
           class="bg-blue-100 px-4 py-2 rounded-lg text-dark-text w-1/2 mx-auto"
           :class="showButton ? 'visible' : 'invisible'"
@@ -44,6 +60,7 @@ export default {
   components: { GameToken },
   props: {
     step: String,
+    mode: String,
   },
   emits: ["newScore"],
   data() {
@@ -59,28 +76,77 @@ export default {
       // for conditional showing
       showButton: false,
 
-      // classes for styling
+      // classes for positioning rock paper scissors version
       position1:
         "border mr-auto row-start-1 col-start-1 transition-transform ease-in-out duration-500",
       position2:
         "border ml-auto row-start-1 col-start-2 transition-transform ease-in-out duration-500",
       position3:
         "border mx-auto row-start-2 col-start-1 col-span-2 transition-transform ease-in-out duration-500",
+      // classes for positioning rock paper scissors lizard spock version
+      positionA:
+        "border mx-auto row-start-1 col-start-1 col-span-2 transition-transform ease-in-out duration-500",
+      positionB:
+        "border -mt-12 mr-auto row-start-2 col-start-1 transition-transform ease-in-out duration-500",
+      positionC:
+        "border -mt-12 ml-auto row-start-2 col-start-2 transition-transform ease-in-out duration-500",
+      positionD:
+        "border ml-12 mr-auto row-start-3 col-start-1 transition-transform ease-in-out duration-500",
+      positionE:
+        "border mr-12 ml-auto row-start-3 col-start-2 transition-transform ease-in-out duration-500",
       tokenPaper: "hidden",
       tokenScissors: "hidden",
       tokenRock: "hidden",
+      tokenLizard: "hidden",
+      tokenSpock: "hidden",
       tokenComputer: "hidden",
     };
+  },
+  computed: {
+    gridContainerClass() {
+      const strClass = "absolute grid z-20";
+      if (this.mode === "rpsls") {
+        return (
+          strClass +
+          " grid-cols-2 grid-rows-[1fr_1fr_1fr_114px] items-center w-[314px] h-[428px]"
+        );
+      } else {
+        return (
+          strClass +
+          " grid-cols-2 grid-rows-[1fr_1fr_114px] items-center w-[314px] h-[428px]"
+        );
+      }
+    },
+    tokenSize() {
+      if (this.mode === "rps") {
+        // default
+        return "";
+      } else {
+        // small token for rpsls
+        return "small";
+      }
+    },
   },
   mounted() {
     this.newGame();
   },
   methods: {
     newGame() {
-      this.tokenPaper = this.position1 + " cursor-pointer";
-      this.tokenScissors = this.position2 + " cursor-pointer";
-      this.tokenRock = this.position3 + " cursor-pointer";
-      this.tokenComputer = "hidden";
+      if (this.mode === "rpsls") {
+        // five tokens layed out in shape of pentagon
+        this.tokenScissors = this.positionA + " cursor-pointer";
+        this.tokenSpock = this.positionB + " cursor-pointer";
+        this.tokenPaper = this.positionC + " cursor-pointer";
+        this.tokenLizard = this.positionD + " cursor-pointer";
+        this.tokenRock = this.positionE + " cursor-pointer";
+        this.tokenComputer = "hidden";
+      } else {
+        // three tokens layed out in shape of inverted triangle
+        this.tokenPaper = this.position1 + " cursor-pointer";
+        this.tokenScissors = this.position2 + " cursor-pointer";
+        this.tokenRock = this.position3 + " cursor-pointer";
+        this.tokenComputer = "hidden";
+      }
     },
     play(choice) {
       this.playerChoice = choice;
