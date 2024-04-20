@@ -16,11 +16,11 @@
 </template>
 
 <script>
-import GameToken from "./components/GameToken.vue";
-import Header from "./components/Header.vue";
-import GameCanvas from "./components/GameCanvas.vue";
-import Footer from "./components/Footer.vue";
-import Rules from "./components/Rules.vue";
+import GameToken from "./rps-components/GameToken.vue";
+import Header from "./rps-components/Header.vue";
+import GameCanvas from "./rps-components/GameCanvas.vue";
+import Footer from "./rps-components/Footer.vue";
+import Rules from "./rps-components/Rules.vue";
 
 export default {
   components: {

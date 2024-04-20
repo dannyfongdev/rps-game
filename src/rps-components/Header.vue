@@ -2,8 +2,8 @@
   <div
     class="flex justify-between items-center h-[96px] w-[314px] border-4 border-header-outline rounded-lg p-6"
   >
-    <div class="leading-[.85] text-lg cursor-pointer" @click="handleClick">
-      ROCK<br />PAPER<br />SCISSORS<br />LIZARD<br />SPOCK
+    <div class="leading-[.85] text-xl cursor-pointer" @click="handleClick">
+      ROCK<br />PAPER<br />SCISSORS
     </div>
     <div
       class="flex flex-col justify-center items-center rounded-md bg-white w-[86px] h-[72px] -mr-3"
