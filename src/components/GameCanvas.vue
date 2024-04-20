@@ -2,15 +2,10 @@
   <div class="flex flex-col w-[314px] h-[428px] relative z-10 overflow-hidden">
     <!-- if playChoice is empty, game state is player pick -->
     <div v-show="!playerChoice" class="relative p-5 mt-7 z-10">
-      <img
-        v-if="mode === 'rpsls'"
-        src="/images/bg-pentagon.svg"
-        alt="background pentagon"
-      />
-      <img v-else src="/images/bg-triangle.svg" alt="background triangle" />
+      <img src="/images/bg-pentagon.svg" alt="background pentagon" />
     </div>
-    <!-- Don't change the height of the grid container, or you will mess up the slide animations -->
-    <div :class="gridContainerClass">
+
+    <div :class="gameContainerClass">
       <div :class="tokenPaper">
         <GameToken :size="tokenSize" choice="paper" @click="play('paper')" />
       </div>
@@ -28,19 +23,20 @@
         <GameToken :size="tokenSize" choice="lizard" @click="play('lizard')" />
       </div>
       <div :class="tokenSpock">
-        <GameToken :size="tokenSize" choice="spock" @click="play('spoke')" />
+        <GameToken :size="tokenSize" choice="spock" @click="play('spock')" />
       </div>
       <div :class="tokenComputer">
         <GameToken :choice="computerChoice" :scale-in="computerChoice" />
       </div>
-      <!-- when results is empty, it doesn't show; when game is over, results is not empty and shows -->
+      <!-- when computerChoice is empty, we don't need to show and it gets in the way -->
       <div
+        v-if="computerChoice"
         class="border row-start-3 col-start-1 col-span-2 flex flex-col justify-center items-center h-[114px] -mt-24"
       >
         <p class="text-center text-4xl uppercase font-bold mb-6">
           {{ results }}
         </p>
-        <!-- showButton is set based on state of game play -->
+        <!-- showButton is set separately because we may delay when it appears -->
         <button
           class="bg-blue-100 px-4 py-2 rounded-lg text-dark-text w-1/2 mx-auto"
           :class="showButton ? 'visible' : 'invisible'"
@@ -76,14 +72,11 @@ export default {
       // for conditional showing
       showButton: false,
 
-      // classes for positioning rock paper scissors version for player to pick one
-      // position1 and position2 are also the location for displaying the results
+      // position1 and position2 are the location for displaying the results
       position1:
         "border mr-auto row-start-1 col-start-1 transition-transform ease-in-out duration-500",
       position2:
         "border ml-auto row-start-1 col-start-2 transition-transform ease-in-out duration-500",
-      position3:
-        "border mx-auto row-start-2 col-start-1 col-span-2 transition-transform ease-in-out duration-500",
 
       // classes for positioning rock paper scissors lizard spock version for player to pick one
       positionA:
@@ -107,26 +100,15 @@ export default {
     };
   },
   computed: {
-    gridContainerClass() {
-      const strClass = "absolute grid z-20";
-      if (this.mode === "rpsls") {
-        return (
-          strClass +
-          " grid-cols-2 grid-rows-[1fr_1fr_1fr_114px] items-center w-[314px] h-[428px]"
-        );
-      } else {
-        return (
-          strClass +
-          " grid-cols-2 grid-rows-[1fr_1fr_114px] items-center w-[314px] h-[428px]"
-        );
-      }
+    // Don't change the height of the container, or you will mess up the slide animations
+    gameContainerClass() {
+      return "absolute grid z-20 grid-cols-2 grid-rows-[1fr_1fr_1fr_114px] items-center w-[314px] h-[428px]";
     },
     tokenSize() {
-      if (this.mode === "rps") {
-        // default
+      if (this.playerChoice) {
+        // default is normal size. if player has chosen, we want to show normal size
         return "";
       } else {
-        // small token for rpsls
         return "small";
       }
     },
@@ -136,21 +118,13 @@ export default {
   },
   methods: {
     newGame() {
-      if (this.mode === "rpsls") {
-        // five tokens layed out in shape of pentagon
-        this.tokenScissors = this.positionA + " cursor-pointer";
-        this.tokenSpock = this.positionB + " cursor-pointer";
-        this.tokenPaper = this.positionC + " cursor-pointer";
-        this.tokenLizard = this.positionD + " cursor-pointer";
-        this.tokenRock = this.positionE + " cursor-pointer";
-        this.tokenComputer = "hidden";
-      } else {
-        // three tokens layed out in shape of inverted triangle
-        this.tokenPaper = this.position1 + " cursor-pointer";
-        this.tokenScissors = this.position2 + " cursor-pointer";
-        this.tokenRock = this.position3 + " cursor-pointer";
-        this.tokenComputer = "hidden";
-      }
+      // five tokens layed out in shape of pentagon
+      this.tokenScissors = this.positionA + " cursor-pointer";
+      this.tokenSpock = this.positionB + " cursor-pointer";
+      this.tokenPaper = this.positionC + " cursor-pointer";
+      this.tokenLizard = this.positionD + " cursor-pointer";
+      this.tokenRock = this.positionE + " cursor-pointer";
+      this.tokenComputer = "hidden";
     },
     play(choice) {
       this.playerChoice = choice;
@@ -158,22 +132,39 @@ export default {
       // move chosen token into position, slide others offcreen
       switch (choice) {
         case "rock":
-          this.tokenPaper = this.position1 + " offscreen-l";
-          this.tokenScissors = this.position2 + " offscreen-r";
-          if (this.mode === "rpsls") {
-            this.tokenLizard = this.positionD + " offscreen-r";
-            this.tokenSpock = this.positionE + " offscreen-l";
-          }
-          this.tokenRock = this.tokenRock + " from-3-to-1";
+          this.tokenScissors = this.positionA + " offscreen-r";
+          this.tokenSpock = this.positionB + " offscreen-l";
+          this.tokenPaper = this.positionC + " offscreen-r";
+          this.tokenLizard = this.positionD + " offscreen-l";
+          this.tokenRock = this.tokenRock + " from-e-to-1";
           break;
         case "paper":
-          this.tokenScissors = this.position2 + " offscreen-r";
-          this.tokenRock = this.position3 + " offscreen-b";
+          this.tokenScissors = this.positionA + " offscreen-r";
+          this.tokenSpock = this.positionB + " offscreen-l";
+          this.tokenPaper = this.positionC + " from-c-to-1";
+          this.tokenLizard = this.positionD + " offscreen-l";
+          this.tokenRock = this.tokenRock + " offscreen-r";
           break;
         case "scissors":
-          this.tokenPaper = this.position1 + " offscreen-l";
-          this.tokenScissors = this.position2 + " from-2-to-1";
-          this.tokenRock = this.position3 + " offscreen-b";
+          this.tokenScissors = this.positionA + " from-a-to-1";
+          this.tokenSpock = this.positionB + " offscreen-l";
+          this.tokenPaper = this.positionC + " offscreen-r";
+          this.tokenLizard = this.positionD + " offscreen-l";
+          this.tokenRock = this.tokenRock + " offscreen-r";
+          break;
+        case "lizard":
+          this.tokenScissors = this.positionA + " offscreen-r";
+          this.tokenSpock = this.positionB + " offscreen-l";
+          this.tokenPaper = this.positionC + " offscreen-r";
+          this.tokenLizard = this.positionD + " from-d-to-1";
+          this.tokenRock = this.tokenRock + " offscreen-r";
+          break;
+        case "spock":
+          this.tokenScissors = this.positionA + " offscreen-r";
+          this.tokenSpock = this.positionB + " from-b-1";
+          this.tokenPaper = this.positionC + " offscreen-r";
+          this.tokenLizard = this.positionD + " offscreen-l";
+          this.tokenRock = this.tokenRock + " offscreen-r";
           break;
       }
 
@@ -242,11 +233,20 @@ export default {
 .offscreen-r {
   transform: translateX(calc(100vw));
 }
-.from-3-to-1 {
-  transform: translate(-92px, -158px);
+.from-a-to-1 {
+  transform: translateX(-92px);
 }
-.from-2-to-1 {
-  transform: translateX(-184px);
+.from-b-to-1 {
+  transform: translateY(184px);
+}
+.from-c-to-1 {
+  transform: translate(-184px, -80px);
+}
+.from-d-to-1 {
+  transform: translate(-48px, -200px);
+}
+.from-e-to-1 {
+  transform: translate(-156px, -200px);
 }
 .p-blank-token {
   padding: 2px;

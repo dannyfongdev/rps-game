@@ -14,7 +14,7 @@ export default {
   },
   data() {
     return {
-      showLizardSpock: false,
+      showLizardSpock: true,
     };
   },
   methods: {
