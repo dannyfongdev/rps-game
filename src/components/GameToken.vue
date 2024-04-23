@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-transparent z-50">
+  <div class="bg-transparent z-50" :class="sizeClass">
     <img
       :src="imageURL"
       alt="game token"

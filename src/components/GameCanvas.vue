@@ -161,7 +161,7 @@ export default {
           break;
         case "spock":
           this.tokenScissors = this.positionA + " offscreen-r";
-          this.tokenSpock = this.positionB + " from-b-1";
+          this.tokenSpock = this.positionB + " from-b-to-1";
           this.tokenPaper = this.positionC + " offscreen-r";
           this.tokenLizard = this.positionD + " offscreen-l";
           this.tokenRock = this.tokenRock + " offscreen-r";
@@ -237,16 +237,16 @@ export default {
   transform: translateX(-92px);
 }
 .from-b-to-1 {
-  transform: translateY(184px);
+  transform: translateY(-82px);
 }
 .from-c-to-1 {
   transform: translate(-184px, -80px);
 }
 .from-d-to-1 {
-  transform: translate(-48px, -200px);
+  transform: translate(-48px, -212px);
 }
 .from-e-to-1 {
-  transform: translate(-156px, -200px);
+  transform: translate(-156px, -212px);
 }
 .p-blank-token {
   padding: 2px;
