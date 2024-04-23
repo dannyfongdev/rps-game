@@ -177,8 +177,8 @@ export default {
       }, 500);
     },
     computerPick() {
-      const computerOptions = ["rock", "paper", "scissors"];
-      const choiceNumber = Math.floor(Math.random() * 3);
+      const computerOptions = ["rock", "paper", "scissors","lizard","spock"];
+      const choiceNumber = Math.floor(Math.random() * 5);
       this.computerChoice = computerOptions[choiceNumber];
       this.tokenComputer = this.position2;
       // console.log(this.computerChoice);
@@ -195,8 +195,15 @@ export default {
         this.theWinner = "";
       } else if (
         (player === "rock" && computer === "scissors") ||
+        (player === "rock" && computer === "lizard") ||
         (player === "paper" && computer === "rock") ||
-        (player === "scissors" && computer === "paper")
+        (player === "paper" && computer === "spock") ||
+        (player === "scissors" && computer === "paper") ||
+        (player === "scissors" && computer === "lizard") ||
+        (player === "lizard" && computer === "spock") ||
+        (player === "lizard" && computer === "paper") ||
+        (player === "spock" && computer === "rock") ||
+        (player === "spock" && computer === "scissors")
       ) {
         this.playerScore++;
         this.results = "YOU WIN";
