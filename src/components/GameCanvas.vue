@@ -1,7 +1,7 @@
 <template>
-  <div class="flex flex-col w-[314px] h-[428px] relative z-10 overflow-hidden">
+  <div class="flex flex-col w-[314px] h-[314px] relative z-10 overflow-hidden">
     <!-- if playChoice is empty, game state is player pick -->
-    <div v-show="!playerChoice" class="relative p-5 mt-7 z-10">
+    <div v-show="!playerChoice" class="relative p-5 z-10">
       <img src="/images/bg-pentagon.svg" alt="background pentagon" />
     </div>
 
@@ -29,25 +29,24 @@
         <GameToken :choice="computerChoice" :scale-in="computerChoice" />
       </div>
       <!-- when computerChoice is empty, we don't need to show and it gets in the way -->
-      <div
-        v-if="computerChoice"
-        class="border row-start-3 col-start-1 col-span-2 flex flex-col justify-center items-center h-[114px] -mt-24"
+    </div>
+    <div
+      v-if="computerChoice"
+      class="absolute z-40 bottom-0 border row-start-3 col-start-1 col-span-2 flex flex-col justify-center items-center w-[314px] h-[114px]"
+    >
+      <p class="text-center text-4xl uppercase font-bold mb-6">
+        {{ results }}
+      </p>
+      <!-- showButton is set separately because we may delay when it appears -->
+      <button
+        class="bg-blue-100 px-4 py-2 rounded-lg text-dark-text w-1/2 mx-auto cursor-pointer"
+        :class="showButton ? 'visible' : 'invisible'"
+        @click="playAgain"
       >
-        <p class="text-center text-4xl uppercase font-bold mb-6">
-          {{ results }}
-        </p>
-        <!-- showButton is set separately because we may delay when it appears -->
-        <button
-          class="bg-blue-100 px-4 py-2 rounded-lg text-dark-text w-1/2 mx-auto"
-          :class="showButton ? 'visible' : 'invisible'"
-          @click="playAgain"
-        >
-          PLAY AGAIN
-        </button>
-      </div>
+        PLAY AGAIN
+      </button>
     </div>
   </div>
-  <div></div>
 </template>
 
 <script>
@@ -102,7 +101,7 @@ export default {
   computed: {
     // Don't change the height of the container, or you will mess up the slide animations
     gameContainerClass() {
-      return "absolute grid z-20 grid-cols-2 grid-rows-[1fr_1fr_1fr_114px] items-center w-[314px] h-[428px]";
+      return "absolute grid z-20 grid-cols-2 grid-rows-[1fr_1fr_1fr] items-center w-[314px] h-[314px]";
     },
     tokenSize() {
       if (this.playerChoice) {
@@ -177,7 +176,7 @@ export default {
       }, 500);
     },
     computerPick() {
-      const computerOptions = ["rock", "paper", "scissors","lizard","spock"];
+      const computerOptions = ["rock", "paper", "scissors", "lizard", "spock"];
       const choiceNumber = Math.floor(Math.random() * 5);
       this.computerChoice = computerOptions[choiceNumber];
       this.tokenComputer = this.position2;

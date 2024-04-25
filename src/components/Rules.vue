@@ -1,14 +1,14 @@
 <template>
   <div class="h-svh w-svw grid justify-center items-center bg-white fade-in">
     <div class="mx-auto text-3xl text-dark-text font-black">RULES</div>
-    <img src="/images/image-rules.svg" alt="rules" class="p-4" />
+    <img src="/images/image-rules-bonus.svg" alt="rules" class="p-4" />
     <button
       class="mx-auto cursor-pointer"
       @click="emitClose"
       ref="closeButton"
       @keydown.esc="emitClose"
     >
-      <img src="/images/icon-close.svg" alt="close" />
+      <img src="/images/icon-close.svg" alt="close" class="ml-1" />
     </button>
   </div>
 </template>

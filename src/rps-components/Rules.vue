@@ -8,7 +8,7 @@
       ref="closeButton"
       @keydown.esc="emitClose"
     >
-      <img src="/images/icon-close.svg" alt="close" />
+      <img src="/images/icon-close.svg" alt="close" class="ml-2" />
     </button>
   </div>
 </template>
