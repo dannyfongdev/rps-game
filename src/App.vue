@@ -1,26 +1,60 @@
 <template>
-  <RockPaperScissorsLizardSpock v-if="showLizardSpock" @toggle="toggleGame" />
-  <RockPaperScissors v-if="showLizardSpock === false" @toggle="toggleGame" />
+  <div class="flex justify-center items-center h-svh gradient-board">
+    <div class="grid grid-rows-[auto_1fr_auto] max-h-[750px] text-white border">
+      <div>
+        <Header @toggle="handleToggle" :score="theScore" />
+      </div>
+      <div class="flex justify-center items-center h-[428px] border">
+        <GameCanvas mode="rpsls" @new-score="changeScore" />
+      </div>
+      <div>
+        <Footer @rules="openRules" />
+      </div>
+    </div>
+  </div>
+  <Rules v-if="showRules" @close="closeRules" class="absolute top-0 z-50" />
 </template>
 
 <script>
-import RockPaperScissors from "./RockPaperScissors.vue";
-import RockPaperScissorsLizardSpock from "./RockPaperScissorsLizardSpock.vue";
+import GameToken from "./components/GameToken.vue";
+import Header from "./components/Header.vue";
+import GameCanvas from "./components/GameCanvas.vue";
+import Footer from "./components/Footer.vue";
+import Rules from "./components/Rules.vue";
 
 export default {
   components: {
-    RockPaperScissors,
-    RockPaperScissorsLizardSpock,
+    GameToken,
+    Header,
+    GameCanvas,
+    Footer,
+    Rules,
   },
+  emits: ["toggle"],
   data() {
     return {
-      showLizardSpock: true,
+      theScore: 0,
+      showRules: false,
     };
   },
+  mounted() {
+    // this.$refs.rulesDialog.showModal();
+  },
   methods: {
-    toggleGame() {
-      console.log(this.showLizardSpock);
-      this.showLizardSpock = !this.showLizardSpock;
+    changeScore(newScore) {
+      // delay so that score doesn't change before computer token is shown
+      setTimeout(() => {
+        this.theScore = newScore;
+      }, 500);
+    },
+    closeRules() {
+      this.showRules = false;
+    },
+    openRules() {
+      this.showRules = true;
+    },
+    handleToggle() {
+      this.$emit("toggle");
     },
   },
 };
