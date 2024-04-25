@@ -126,6 +126,12 @@ export default {
       this.tokenComputer = "hidden";
     },
     play(choice) {
+      // click should not have any effect if player has already chosen
+      // newGame() will set playerChoice = ""
+      if (this.playerChoice) {
+        return;
+      }
+
       this.playerChoice = choice;
 
       // move chosen token into position, slide others offcreen
