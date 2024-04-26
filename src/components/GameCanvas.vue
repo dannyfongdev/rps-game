@@ -32,14 +32,14 @@
     </div>
     <div
       v-if="computerChoice"
-      class="absolute z-40 bottom-0 border row-start-3 col-start-1 col-span-2 flex flex-col justify-center items-center w-[314px] h-[114px]"
+      class="absolute z-40 bottom-0 border row-start-3 col-start-1 col-span-2 flex flex-col justify-center items-center w-[314px] h-[114px] lg:w-[950px] lg:bottom-[120px]"
     >
       <p class="text-center text-4xl uppercase font-bold mb-6">
         {{ results }}
       </p>
       <!-- showButton is set separately because we may delay when it appears -->
       <button
-        class="bg-blue-100 px-4 py-2 rounded-lg text-dark-text w-1/2 mx-auto cursor-pointer"
+        class="bg-blue-100 px-4 py-2 rounded-lg text-dark-text w-1/2 mx-auto cursor-pointer lg:w-[218px] lg:h-[46px]"
         :class="showButton ? 'visible' : 'invisible'"
         @click="playAgain"
       >
