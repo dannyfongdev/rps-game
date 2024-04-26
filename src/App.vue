@@ -1,10 +1,12 @@
 <template>
   <div class="flex justify-center items-center h-svh gradient-board">
-    <div class="grid grid-rows-[auto_1fr_auto] max-h-[750px] text-white border">
+    <div
+      class="grid grid-rows-[auto_1fr_auto] max-h-[750px] text-white border-0"
+    >
       <div>
         <Header @toggle="handleToggle" :score="theScore" />
       </div>
-      <div class="flex justify-center items-center h-[428px] border">
+      <div class="flex justify-center items-center h-[428px] border-0">
         <GameCanvas mode="rpsls" @new-score="changeScore" />
       </div>
       <div>

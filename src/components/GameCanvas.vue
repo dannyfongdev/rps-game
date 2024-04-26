@@ -32,7 +32,7 @@
     </div>
     <div
       v-if="computerChoice"
-      class="absolute z-40 bottom-0 border row-start-3 col-start-1 col-span-2 flex flex-col justify-center items-center w-[314px] h-[114px] lg:w-[950px] lg:bottom-[120px]"
+      class="absolute z-40 bottom-0 border-0 row-start-3 col-start-1 col-span-2 flex flex-col justify-center items-center w-[314px] h-[114px] lg:w-[950px] lg:bottom-[120px]"
     >
       <p class="text-center text-4xl uppercase font-bold mb-6">
         {{ results }}
@@ -73,21 +73,21 @@ export default {
 
       // position1 and position2 are the location for displaying the results
       position1:
-        "border mr-auto row-start-1 col-start-1 transition-transform ease-in-out duration-500",
+        "border-0 mr-auto row-start-1 col-start-1 transition-transform ease-in-out duration-500",
       position2:
-        "border ml-auto row-start-1 col-start-2 transition-transform ease-in-out duration-500",
+        "border-0 ml-auto row-start-1 col-start-2 transition-transform ease-in-out duration-500",
 
       // classes for positioning rock paper scissors lizard spock version for player to pick one
       positionA:
-        "border mx-auto row-start-1 col-start-1 col-span-2 transition-transform ease-in-out duration-500",
+        "border-0 mx-auto row-start-1 col-start-1 col-span-2 transition-transform ease-in-out duration-500",
       positionB:
-        "border -mt-12 mr-auto row-start-2 col-start-1 transition-transform ease-in-out duration-500",
+        "border-0 -mt-12 mr-auto row-start-2 col-start-1 transition-transform ease-in-out duration-500",
       positionC:
-        "border -mt-12 ml-auto row-start-2 col-start-2 transition-transform ease-in-out duration-500",
+        "border-0 -mt-12 ml-auto row-start-2 col-start-2 transition-transform ease-in-out duration-500",
       positionD:
-        "border ml-12 mr-auto row-start-3 col-start-1 transition-transform ease-in-out duration-500",
+        "border-0 ml-12 mr-auto row-start-3 col-start-1 transition-transform ease-in-out duration-500",
       positionE:
-        "border mr-12 ml-auto row-start-3 col-start-2 transition-transform ease-in-out duration-500",
+        "border-0 mr-12 ml-auto row-start-3 col-start-2 transition-transform ease-in-out duration-500",
 
       // set this to apply tailwindCSS to the token, e.g. hidden, offscreen-b, etc.
       tokenPaper: "hidden",
