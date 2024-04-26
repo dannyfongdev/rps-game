@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col w-[314px] h-[314px] relative z-10 overflow-hidden">
+  <div :class="wrapperClass">
     <!-- if playChoice is empty, game state is player pick -->
     <div v-show="!playerChoice" class="relative p-5 z-10">
       <img src="/images/bg-pentagon.svg" alt="background pentagon" />
@@ -100,8 +100,20 @@ export default {
   },
   computed: {
     // Don't change the height of the container, or you will mess up the slide animations
+    wrapperClass() {
+      // if playerChoice is empty, then we are in the player pick state
+      if (!this.playerChoice) {
+        return "flex flex-col w-[314px] h-[314px] relative z-10 overflow-hidden";
+      } else {
+        return "flex flex-col justify-center w-[314px] h-[314px] relative z-10 overflow-hidden lg:w-[950px]";
+      }
+    },
     gameContainerClass() {
-      return "absolute grid z-20 grid-cols-2 grid-rows-[1fr_1fr_1fr] items-center w-[314px] h-[314px]";
+      if (!this.playerChoice) {
+        return "absolute grid z-20 grid-cols-2 grid-rows-[1fr_1fr_1fr] justify-center items-center w-[314px] h-[314px]";
+      } else {
+        return "absolute grid z-20 grid-cols-2 grid-rows-[1fr_1fr_1fr] justify-center items-center w-[314px] h-[314px] lg:w-[950px]";
+      }
     },
     tokenSize() {
       if (this.playerChoice) {
@@ -247,18 +259,33 @@ export default {
 }
 .from-a-to-1 {
   transform: translateX(-92px);
+  @media (min-width: 1024px) {
+    transform: translateX(-330px);
+  }
 }
 .from-b-to-1 {
   transform: translateY(-82px);
+  @media (min-width: 1024px) {
+    transform: translateY(-244px);
+  }
 }
 .from-c-to-1 {
   transform: translate(-184px, -80px);
+  @media (min-width: 1024px) {
+    transform: translate(-658px, -244px);
+  }
 }
 .from-d-to-1 {
   transform: translate(-48px, -212px);
+  @media (min-width: 1024px) {
+    transform: translate(-48px, -534px);
+  }
 }
 .from-e-to-1 {
   transform: translate(-156px, -212px);
+  @media (min-width: 1024px) {
+    transform: translate(-610px, -534px);
+  }
 }
 .p-blank-token {
   padding: 2px;
