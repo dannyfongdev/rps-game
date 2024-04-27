@@ -38,7 +38,7 @@ export default {
       if (this.size === "small") {
         return "w-24";
       } else {
-        return "w-32 lg:w-[290px]";
+        return "w-32 lg:w-[200px] xl:w-[290px]";
       }
     },
   },

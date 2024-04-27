@@ -25,23 +25,28 @@
       <div :class="tokenSpock">
         <GameToken :size="tokenSize" choice="spock" @click="play('spock')" />
       </div>
-      <!-- <div> -->
-      <!-- <div>PLAYER PICKS</div> -->
-      <div :class="tokenPlayer">
-        <GameToken :choice="playerChoice" :scale-in="playerChoice" />
+      <div
+        :class="tokenPlayer"
+        class="flex flex-col-reverse gap-4 lg:flex-col lg:gap-8"
+      >
+        <div class="mx-auto lg:text-xl">PLAYER PICKED</div>
+        <div>
+          <GameToken :choice="playerChoice" :scale-in="playerChoice" />
+        </div>
       </div>
-      <!-- </div> -->
-      <!-- <div> -->
-      <!-- <div>HOUSE PICKS</div> -->
-      <div :class="tokenComputer">
-        <GameToken :choice="computerChoice" :scale-in="computerChoice" />
+      <div
+        :class="tokenComputer"
+        class="flex flex-col-reverse gap-4 lg:flex-col lg:gap-8"
+      >
+        <div class="mx-auto lg:text-xl">THE HOUSE PICKED</div>
+        <div>
+          <GameToken :choice="computerChoice" :scale-in="computerChoice" />
+        </div>
       </div>
-      <!-- </div> -->
-      <!-- when computerChoice is empty, we don't need to show and it gets in the way -->
     </div>
     <div
       v-if="computerChoice"
-      class="absolute z-40 bottom-0 border-0 row-start-3 col-start-1 col-span-2 flex flex-col justify-center items-center w-[314px] h-[114px] lg:w-[950px] lg:bottom-[120px]"
+      class="absolute z-40 bottom-0 border-0 row-start-3 col-start-1 col-span-2 flex flex-col justify-center items-center w-[314px] h-[114px] lg:w-[800px] lg:bottom-[280px] xl:w-[950px] xl:bottom-[240px]"
     >
       <p
         v-show="showResults"
@@ -100,31 +105,33 @@ export default {
       positionE:
         "border-0 mr-12 ml-auto row-start-3 col-start-2 transition-transform ease-in-out duration-500",
 
-      // set this to apply tailwindCSS to the token, e.g. hidden, offscreen-b, etc.
+      // set this to apply tailwindCSS to the token, e.g. hidden, offscreen-x, etc.
       tokenPaper: "hidden",
       tokenScissors: "hidden",
       tokenRock: "hidden",
       tokenLizard: "hidden",
       tokenSpock: "hidden",
+
+      // these are wrapper class that hold token and label for player and computer picks
       tokenPlayer: "hidden",
       tokenComputer: "hidden",
     };
   },
   computed: {
-    // Don't change the height of the container, or you will mess up the slide animations
     wrapperClass() {
       // if playerChoice is empty, then we are in the player pick state
+      // Don't change the height of the container, or you will mess up the slide animations
       if (!this.playerChoice) {
         return "flex flex-col w-[314px] h-[314px] relative z-10";
       } else {
-        return "flex flex-col justify-center w-[314px] h-[314px] relative z-10 overflow-hidden lg:w-[950px]";
+        return "flex flex-col justify-center w-[314px] h-[314px] relative z-10 overflow-visible lg:w-[800px] xl:w-[950px] lg:h-[600px]";
       }
     },
     gameContainerClass() {
       if (!this.playerChoice) {
         return "absolute grid z-20 grid-cols-2 grid-rows-[1fr_1fr_1fr] justify-center items-center w-[314px] h-[314px]";
       } else {
-        return "absolute grid z-20 grid-cols-2 grid-rows-[1fr_1fr_1fr] justify-center items-center w-[314px] h-[314px] lg:w-[950px]";
+        return "absolute grid z-20 grid-cols-2 grid-rows-[1fr_1fr_1fr] justify-center items-center w-[314px] h-[314px]  lg:w-[800px] xl:w-[950px]";
       }
     },
     tokenSize() {
