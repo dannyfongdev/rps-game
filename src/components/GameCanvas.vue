@@ -1,7 +1,7 @@
 <template>
   <!-- display the five choices for the player to pick -->
   <div v-show="!playerChoice" class="mx-auto">
-    <div class="flex flex-col w-[314px] h-[314px] relative z-10">
+    <div class="flex flex-col w-[314px] h-[314px] mb-8 relative z-10">
       <div class="relative p-5 z-10">
         <img src="/images/bg-pentagon.svg" alt="background pentagon" />
       </div>
