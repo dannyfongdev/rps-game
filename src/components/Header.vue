@@ -1,6 +1,6 @@
 <template>
   <div
-    class="mx-auto flex justify-between items-center h-[96px] w-[316px] border-4 border-header-outline rounded-lg pl-6 pr-4 md:w-[700px] md:h-[150px] md:pl-8 md:pr-6"
+    class="mx-auto mt-1 flex justify-between items-center h-[96px] w-[316px] border-4 border-header-outline rounded-lg pl-6 pr-4 md:w-[700px] md:h-[150px] md:pl-8 md:pr-6"
   >
     <div class="leading-[.85] text-lg md:text-2xl md:leading-[.8]">
       ROCK<br />PAPER<br />SCISSORS<br />LIZARD<br />SPOCK
