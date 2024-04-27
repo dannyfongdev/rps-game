@@ -1,14 +1,24 @@
 <template>
-  <div class="h-svh w-svw grid justify-center items-center bg-white fade-in">
-    <div class="mx-auto text-3xl text-dark-text font-black">RULES</div>
-    <img src="/images/image-rules-bonus.svg" alt="rules" class="p-4" />
+  <div
+    class="h-svh w-svw grid justify-center items-center bg-white fade-in p-4 md:w-[412px] md:h-[412px] md:mx-auto"
+  >
+    <div
+      class="mx-auto text-3xl text-dark-text font-black md:w-full md:mr-auto"
+    >
+      RULES
+    </div>
+    <img
+      src="/images/image-rules-bonus.svg"
+      alt="rules"
+      class="w-[90%] mx-auto mb-4 md:col-span-2"
+    />
     <button
-      class="mx-auto cursor-pointer"
+      class="mx-auto cursor-pointer md:row-start-1 md:col-start-2 md:w-full"
       @click="emitClose"
       ref="closeButton"
       @keydown.esc="emitClose"
     >
-      <img src="/images/icon-close.svg" alt="close" class="ml-1" />
+      <img src="/images/icon-close.svg" alt="close" class="ml-1 md:ml-auto" />
     </button>
   </div>
 </template>
