@@ -25,22 +25,33 @@
       <div :class="tokenSpock">
         <GameToken :size="tokenSize" choice="spock" @click="play('spock')" />
       </div>
+      <!-- <div> -->
+      <!-- <div>PLAYER PICKS</div> -->
+      <div :class="tokenPlayer">
+        <GameToken :choice="playerChoice" :scale-in="playerChoice" />
+      </div>
+      <!-- </div> -->
+      <!-- <div> -->
+      <!-- <div>HOUSE PICKS</div> -->
       <div :class="tokenComputer">
         <GameToken :choice="computerChoice" :scale-in="computerChoice" />
       </div>
+      <!-- </div> -->
       <!-- when computerChoice is empty, we don't need to show and it gets in the way -->
     </div>
     <div
       v-if="computerChoice"
       class="absolute z-40 bottom-0 border-0 row-start-3 col-start-1 col-span-2 flex flex-col justify-center items-center w-[314px] h-[114px] lg:w-[950px] lg:bottom-[120px]"
     >
-      <p class="text-center text-4xl uppercase font-bold mb-6">
+      <p
+        v-show="showResults"
+        class="text-center text-4xl uppercase font-bold mb-6"
+      >
         {{ results }}
       </p>
-      <!-- showButton is set separately because we may delay when it appears -->
       <button
         class="bg-blue-100 px-4 py-2 rounded-lg text-dark-text w-1/2 mx-auto cursor-pointer lg:w-[218px] lg:h-[46px]"
-        :class="showButton ? 'visible' : 'invisible'"
+        :class="showResults ? 'visible' : 'invisible'"
         @click="playAgain"
       >
         PLAY AGAIN
@@ -69,7 +80,7 @@ export default {
       theWinner: "",
 
       // for conditional showing
-      showButton: false,
+      showResults: false,
 
       // position1 and position2 are the location for displaying the results
       position1:
@@ -95,6 +106,7 @@ export default {
       tokenRock: "hidden",
       tokenLizard: "hidden",
       tokenSpock: "hidden",
+      tokenPlayer: "hidden",
       tokenComputer: "hidden",
     };
   },
@@ -103,7 +115,7 @@ export default {
     wrapperClass() {
       // if playerChoice is empty, then we are in the player pick state
       if (!this.playerChoice) {
-        return "flex flex-col w-[314px] h-[314px] relative z-10 overflow-hidden";
+        return "flex flex-col w-[314px] h-[314px] relative z-10";
       } else {
         return "flex flex-col justify-center w-[314px] h-[314px] relative z-10 overflow-hidden lg:w-[950px]";
       }
@@ -135,6 +147,7 @@ export default {
       this.tokenPaper = this.positionC + " cursor-pointer";
       this.tokenLizard = this.positionD + " cursor-pointer";
       this.tokenRock = this.positionE + " cursor-pointer";
+      this.tokenPlayer = "hidden";
       this.tokenComputer = "hidden";
     },
     play(choice) {
@@ -146,46 +159,16 @@ export default {
 
       this.playerChoice = choice;
 
-      // move chosen token into position, slide others offcreen
-      switch (choice) {
-        case "rock":
-          this.tokenScissors = this.positionA + " offscreen-r";
-          this.tokenSpock = this.positionB + " offscreen-l";
-          this.tokenPaper = this.positionC + " offscreen-r";
-          this.tokenLizard = this.positionD + " offscreen-l";
-          this.tokenRock = this.tokenRock + " from-e-to-1";
-          break;
-        case "paper":
-          this.tokenScissors = this.positionA + " offscreen-r";
-          this.tokenSpock = this.positionB + " offscreen-l";
-          this.tokenPaper = this.positionC + " from-c-to-1";
-          this.tokenLizard = this.positionD + " offscreen-l";
-          this.tokenRock = this.tokenRock + " offscreen-r";
-          break;
-        case "scissors":
-          this.tokenScissors = this.positionA + " from-a-to-1";
-          this.tokenSpock = this.positionB + " offscreen-l";
-          this.tokenPaper = this.positionC + " offscreen-r";
-          this.tokenLizard = this.positionD + " offscreen-l";
-          this.tokenRock = this.tokenRock + " offscreen-r";
-          break;
-        case "lizard":
-          this.tokenScissors = this.positionA + " offscreen-r";
-          this.tokenSpock = this.positionB + " offscreen-l";
-          this.tokenPaper = this.positionC + " offscreen-r";
-          this.tokenLizard = this.positionD + " from-d-to-1";
-          this.tokenRock = this.tokenRock + " offscreen-r";
-          break;
-        case "spock":
-          this.tokenScissors = this.positionA + " offscreen-r";
-          this.tokenSpock = this.positionB + " from-b-to-1";
-          this.tokenPaper = this.positionC + " offscreen-r";
-          this.tokenLizard = this.positionD + " offscreen-l";
-          this.tokenRock = this.tokenRock + " offscreen-r";
-          break;
-      }
+      // slide tokens offcreen
+
+      this.tokenScissors = this.positionA + " offscreen-r";
+      this.tokenSpock = this.positionB + " offscreen-l";
+      this.tokenPaper = this.positionC + " offscreen-r";
+      this.tokenLizard = this.positionD + " offscreen-l";
+      this.tokenRock = this.positionE + " offscreen-r";
 
       // slide blank token into place
+      this.tokenPlayer = this.position1 + " p-blank-token";
       this.tokenComputer = this.position2 + " p-blank-token";
 
       // pause before show computer's choice
@@ -230,14 +213,16 @@ export default {
         this.results = "YOU LOSE";
         this.theWinner = computer;
       }
-      // console.log(this.results);
-      this.showButton = true;
+      // show results after computer pick is shown, need delay
+      setTimeout(() => {
+        this.showResults = true;
+      }, 700);
 
       // send score back to parent component
       this.$emit("newScore", this.playerScore - this.computerScore);
     },
     playAgain() {
-      this.showButton = false;
+      this.showResults = false;
       this.playerChoice = "";
       this.computerChoice = "";
       this.results = "";
