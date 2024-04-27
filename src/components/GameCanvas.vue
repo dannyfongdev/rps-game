@@ -31,7 +31,11 @@
       >
         <div class="mx-auto lg:text-xl">PLAYER PICKED</div>
         <div>
-          <GameToken :choice="playerChoice" :scale-in="playerChoice" />
+          <GameToken
+            :choice="playerChoice"
+            :winner="theWinner"
+            scale-in="yes"
+          />
         </div>
       </div>
       <div
@@ -40,7 +44,11 @@
       >
         <div class="mx-auto lg:text-xl">THE HOUSE PICKED</div>
         <div>
-          <GameToken :choice="computerChoice" :scale-in="computerChoice" />
+          <GameToken
+            :choice="computerChoice"
+            :winner="theWinner"
+            scale-in="yes"
+          />
         </div>
       </div>
     </div>

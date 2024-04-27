@@ -13,6 +13,7 @@ export default {
     choice: "",
     scaleIn: "",
     size: "",
+    winner: "",
   },
   data() {
     return {};
@@ -29,7 +30,10 @@ export default {
     },
     animationClass() {
       if (!this.scaleIn) {
-        return "";
+        return;
+      }
+      if (this.choice === this.winner) {
+        return "animate-bounce";
       } else {
         return "scale-in";
       }
