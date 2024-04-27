@@ -1,6 +1,8 @@
 <template>
-  <main class="gradient-board text-white h-svh w-svw overflow-hidden">
-    <div class="flex flex-col justify-between max-h-[750px] lg:max-h-[900px]">
+  <main class="gradient-board text-white h-svh w-svw overflow-x-hidden">
+    <div
+      class="flex flex-col justify-between max-h-[750px] lg:max-h-[900px] lg:min-h-[750px]"
+    >
       <Header @toggle="handleToggle" :score="theScore" />
       <GameCanvas @new-score="changeScore" />
       <Footer @rules="openRules" />

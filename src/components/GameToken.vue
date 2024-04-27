@@ -1,10 +1,6 @@
 <template>
-  <div class="bg-transparent z-50" :class="sizeClass">
-    <img
-      :src="imageURL"
-      alt="game token"
-      :class="animationClass + ' ' + sizeClass"
-    />
+  <div class="bg-transparent z-50" :class="animationClass">
+    <img :src="imageURL" alt="game token" />
   </div>
 </template>
 <script>
@@ -29,20 +25,16 @@ export default {
       return "gradient-" + this.choice;
     },
     animationClass() {
-      if (!this.scaleIn) {
-        return;
-      }
-      if (this.choice === this.winner) {
-        return "animate-bounce";
-      } else {
-        return "scale-in";
-      }
-    },
-    sizeClass() {
+      // small means it is for user to pick
+      // otherwise we are show what player and computer picked
       if (this.size === "small") {
-        return "w-24";
+        return "w-24 fade-in";
       } else {
-        return "w-32 lg:w-[200px] xl:w-[290px]";
+        if (this.choice === this.winner) {
+          return "w-32 lg:w-[200px] xl:w-[290px] animate-bounce";
+        } else {
+          return "w-32 lg:w-[200px] xl:w-[290px] scale-in";
+        }
       }
     },
   },
@@ -50,7 +42,6 @@ export default {
 </script>
 
 <style scoped>
-/* scale from 0 to 1 for computer choice */
 @keyframes kf-scale-in {
   0% {
     transform: scale(0);
@@ -62,10 +53,15 @@ export default {
 .scale-in {
   animation: kf-scale-in 500ms ease-in-out forwards;
 }
-.scale-delay-1 {
-  animation-delay: 100ms;
+@keyframes kf-fade-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
-.scale-delay-2 {
-  animation-delay: 200ms;
+.fade-in {
+  animation: kf-fade-in 150ms ease-in-out forwards;
 }
 </style>
