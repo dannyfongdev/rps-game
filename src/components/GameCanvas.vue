@@ -39,7 +39,7 @@
   <!-- display the results -->
   <div
     v-show="playerChoice"
-    class="mx-auto grid grid-rows-2 gap-6 w-[314px] lg:w-[800px] xl:w-[950px]"
+    class="mx-auto grid grid-rows-2 gap-6 w-[314px] lg:grid-rows-1 lg:w-[800px] xl:w-[950px]"
   >
     <div
       :class="tokenPlayer"
