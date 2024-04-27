@@ -1,5 +1,5 @@
 <template>
-  <div class="gradient-board text-white h-svh w-svw overflow-hidden">
+  <main class="gradient-board text-white h-svh w-svw overflow-hidden">
     <div
       class="flex flex-col justify-between min-h-[630px] max-h-[750px] lg:max-h-[900px]"
     >
@@ -7,7 +7,7 @@
       <GameCanvas @new-score="changeScore" />
       <Footer @rules="openRules" />
     </div>
-  </div>
+  </main>
   <Rules v-if="showRules" @close="closeRules" class="absolute top-0 z-50" />
 </template>
 
