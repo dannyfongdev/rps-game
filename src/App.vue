@@ -1,6 +1,6 @@
 <template>
   <div
-    class="flex justify-center items-center h-svh gradient-board overflow-hidden"
+    class="flex justify-center items-center h-lvh gradient-board overflow-hidden"
   >
     <div
       class="grid grid-rows-[auto_1fr_auto] max-h-[750px] text-white border-0"
