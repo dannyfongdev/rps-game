@@ -1,60 +1,71 @@
 <template>
-  <div :class="wrapperClass">
-    <!-- if playChoice is empty, game state is player pick -->
-    <div v-show="!playerChoice" class="relative p-5 z-10">
-      <img src="/images/bg-pentagon.svg" alt="background pentagon" />
-    </div>
+  <!-- display the five choices for the player to pick -->
+  <div v-show="!playerChoice" class="mx-auto">
+    <div class="flex flex-col w-[314px] h-[314px] relative z-10">
+      <div class="relative p-5 z-10">
+        <img src="/images/bg-pentagon.svg" alt="background pentagon" />
+      </div>
 
-    <div :class="gameContainerClass">
-      <div :class="tokenPaper">
-        <GameToken :size="tokenSize" choice="paper" @click="play('paper')" />
+      <div
+        class="absolute grid z-20 grid-cols-2 grid-rows-[1fr_1fr_1fr] justify-center items-center w-[314px] h-[314px]"
+      >
+        <div :class="tokenPaper">
+          <GameToken :size="tokenSize" choice="paper" @click="play('paper')" />
+        </div>
+        <div :class="tokenScissors">
+          <GameToken
+            :size="tokenSize"
+            choice="scissors"
+            @click="play('scissors')"
+          />
+        </div>
+        <div :class="tokenRock">
+          <GameToken :size="tokenSize" choice="rock" @click="play('rock')" />
+        </div>
+        <div :class="tokenLizard">
+          <GameToken
+            :size="tokenSize"
+            choice="lizard"
+            @click="play('lizard')"
+          />
+        </div>
+        <div :class="tokenSpock">
+          <GameToken :size="tokenSize" choice="spock" @click="play('spock')" />
+        </div>
       </div>
-      <div :class="tokenScissors">
+    </div>
+  </div>
+
+  <!-- display the results -->
+  <div
+    v-show="playerChoice"
+    class="mx-auto grid gap-12 w-[314px] lg:w-[800px] xl:w-[950px]"
+  >
+    <div
+      :class="tokenPlayer"
+      class="flex flex-col-reverse gap-4 lg:flex-col lg:gap-8"
+    >
+      <div class="mx-auto lg:text-xl">PLAYER PICKED</div>
+      <div>
+        <GameToken :choice="playerChoice" :winner="theWinner" scale-in="yes" />
+      </div>
+    </div>
+    <div
+      :class="tokenComputer"
+      class="flex flex-col-reverse gap-4 lg:flex-col lg:gap-8"
+    >
+      <div class="mx-auto lg:text-xl">THE HOUSE PICKED</div>
+      <div>
         <GameToken
-          :size="tokenSize"
-          choice="scissors"
-          @click="play('scissors')"
+          :choice="computerChoice"
+          :winner="theWinner"
+          scale-in="yes"
         />
-      </div>
-      <div :class="tokenRock">
-        <GameToken :size="tokenSize" choice="rock" @click="play('rock')" />
-      </div>
-      <div :class="tokenLizard">
-        <GameToken :size="tokenSize" choice="lizard" @click="play('lizard')" />
-      </div>
-      <div :class="tokenSpock">
-        <GameToken :size="tokenSize" choice="spock" @click="play('spock')" />
-      </div>
-      <div
-        :class="tokenPlayer"
-        class="flex flex-col-reverse gap-4 lg:flex-col lg:gap-8"
-      >
-        <div class="mx-auto lg:text-xl">PLAYER PICKED</div>
-        <div>
-          <GameToken
-            :choice="playerChoice"
-            :winner="theWinner"
-            scale-in="yes"
-          />
-        </div>
-      </div>
-      <div
-        :class="tokenComputer"
-        class="flex flex-col-reverse gap-4 lg:flex-col lg:gap-8"
-      >
-        <div class="mx-auto lg:text-xl">THE HOUSE PICKED</div>
-        <div>
-          <GameToken
-            :choice="computerChoice"
-            :winner="theWinner"
-            scale-in="yes"
-          />
-        </div>
       </div>
     </div>
     <div
       v-if="computerChoice"
-      class="absolute z-40 bottom-0 border-0 row-start-3 col-start-1 col-span-2 flex flex-col justify-center items-center w-[314px] h-[114px] lg:w-[800px] lg:bottom-[280px] xl:w-[950px] xl:bottom-[240px]"
+      class="border-0 row-start-2 col-start-1 col-span-2 flex flex-col justify-center items-center lg:row-start-1 lg:col-start-2 lg:col-span-1"
     >
       <p
         v-show="showResults"
@@ -99,7 +110,7 @@ export default {
       position1:
         "border-0 mr-auto row-start-1 col-start-1 transition-transform ease-in-out duration-500",
       position2:
-        "border-0 ml-auto row-start-1 col-start-2 transition-transform ease-in-out duration-500",
+        "border-0 ml-auto row-start-1 col-start-2 transition-transform ease-in-out duration-500 lg:col-start-3", // lg: we put results in col-2
 
       // classes for positioning rock paper scissors lizard spock version for player to pick one
       positionA:
@@ -126,22 +137,6 @@ export default {
     };
   },
   computed: {
-    wrapperClass() {
-      // if playerChoice is empty, then we are in the player pick state
-      // Don't change the height of the container, or you will mess up the slide animations
-      if (!this.playerChoice) {
-        return "flex flex-col w-[314px] h-[314px] relative z-10";
-      } else {
-        return "flex flex-col justify-center w-[314px] h-[314px] relative z-10 overflow-visible lg:w-[800px] xl:w-[950px] lg:h-[600px]";
-      }
-    },
-    gameContainerClass() {
-      if (!this.playerChoice) {
-        return "absolute grid z-20 grid-cols-2 grid-rows-[1fr_1fr_1fr] justify-center items-center w-[314px] h-[314px]";
-      } else {
-        return "absolute grid z-20 grid-cols-2 grid-rows-[1fr_1fr_1fr] justify-center items-center w-[314px] h-[314px]  lg:w-[800px] xl:w-[950px]";
-      }
-    },
     tokenSize() {
       if (this.playerChoice) {
         // default is normal size. if player has chosen, we want to show normal size
@@ -175,7 +170,6 @@ export default {
       this.playerChoice = choice;
 
       // slide tokens offcreen
-
       this.tokenScissors = this.positionA + " offscreen-r";
       this.tokenSpock = this.positionB + " offscreen-l";
       this.tokenPaper = this.positionC + " offscreen-r";

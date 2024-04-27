@@ -1,11 +1,11 @@
 <template>
-  <div class="flex justify-center">
-    <button
+  <div class="flex justify-center max-w-[1440px] lg:justify-end lg:mr-8">
+    <a
       @click="handleClick"
-      class="mx-auto border-2 px-10 py-2 border-header-outline rounded-lg lg:w-[128px] lg:h-[40px] lg:absolute lg:right-[30px] lg:bottom-[30px] lg:py-1"
+      class="border-2 px-10 py-2 border-header-outline rounded-lg lg:w-[128px] lg:h-[40px]"
     >
       RULES
-    </button>
+    </a>
   </div>
 </template>
 

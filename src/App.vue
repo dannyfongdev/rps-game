@@ -1,26 +1,17 @@
 <template>
-  <div
-    class="flex justify-center items-center h-svh gradient-board overflow-hidden"
-  >
+  <div class="gradient-board text-white h-svh w-svw overflow-hidden">
     <div
-      class="grid grid-rows-[auto_1fr_auto] max-h-[750px] text-white border-0"
+      class="flex flex-col justify-between min-h-[630px] max-h-[750px] lg:max-h-[900px]"
     >
-      <div>
-        <Header @toggle="handleToggle" :score="theScore" />
-      </div>
-      <div class="flex justify-center items-center h-[428px] border-0">
-        <GameCanvas mode="rpsls" @new-score="changeScore" />
-      </div>
-      <div>
-        <Footer @rules="openRules" />
-      </div>
+      <Header @toggle="handleToggle" :score="theScore" />
+      <GameCanvas @new-score="changeScore" />
+      <Footer @rules="openRules" />
     </div>
   </div>
   <Rules v-if="showRules" @close="closeRules" class="absolute top-0 z-50" />
 </template>
 
 <script>
-import GameToken from "./components/GameToken.vue";
 import Header from "./components/Header.vue";
 import GameCanvas from "./components/GameCanvas.vue";
 import Footer from "./components/Footer.vue";
@@ -28,7 +19,6 @@ import Rules from "./components/Rules.vue";
 
 export default {
   components: {
-    GameToken,
     Header,
     GameCanvas,
     Footer,
